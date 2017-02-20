@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "karma start test/unit/karma.conf.js --single-run"
+    "test": "NODE_ENV=test node_modules/.bin/mocha-webpack --webpack-config build/webpack.test.conf.js test/unit/specs/*.js"
   },
   "repository": {
     "type": "git",
@@ -66,6 +66,7 @@
     "karma-webpack": "^1.7.0",
     "lolex": "^1.4.0",
     "mocha": "^3.1.2",
+    "mocha-webpack": "^0.7.0",
     "nodemon": "^1.10.2",
     "postcss-cssnext": "^2.7.0",
     "postcss-import": "^8.1.2",
