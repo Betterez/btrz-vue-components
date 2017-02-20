@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "NODE_ENV=test node_modules/.bin/mocha-webpack --webpack-config build/webpack.test.conf.js test/unit/specs/*.js"
+    "test": "NODE_ENV=test node_modules/.bin/mocha-webpack --webpack-config build/webpack.test.conf.js 'test/unit/specs/*.js'"
   },
   "repository": {
     "type": "git",
