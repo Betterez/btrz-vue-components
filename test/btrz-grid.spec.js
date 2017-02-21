@@ -1,3 +1,5 @@
+import "./setup";
+
 import { expect } from "chai";
 import { insertHTML, mountComponent } from "./utils";
 const BtrzGrid = require("src/btrz-grid");

@@ -1,3 +1,5 @@
+import "./setup";
+
 import { expect } from "chai";
 import { mountComponent } from "./utils";
 const BtrzProductItem = require("src/btrz-product-item");
