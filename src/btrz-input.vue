@@ -2,10 +2,11 @@
   <div class="col-xs-12 col-sm-12 col-md-6">
     <label class="hidden-xs"></label>
     <div class="input-container">
-      <input type="text" name="inputValidate" class="form-control"
+      <input name="inputValidate" class="form-control"
+        v-bind:type="type"
+        v-bind:placeholder="placeholder"
         v-validate
-        v-bind:data-vv-rules="validations"
-        v-bind:placeholder="placeholder" />
+        v-bind:data-vv-rules="validations" />
       <div v-show="errors.has('inputValidate')" class="error">{{ errors.first('inputValidate') }}</div>
     </div>
   </div>
@@ -14,9 +15,6 @@
 <script>
   export default {
     name: "BtrzInput",
-    props: ["placeholder", "validations"],
-    data: () => ({
-      input: "",
-    }),
+    props: ["placeholder", "validations", "type"],
   }
 </script>
