@@ -4,7 +4,8 @@ import { expect } from "chai";
 import { insertHTML, mountComponent } from "./utils";
 import VeeValidate from 'vee-validate';
 import { Validator } from 'vee-validate';
-const BtrzInput = require("src/btrz-input");
+import BtrzInput from '../src/btrz-input';
+
 
 before(() => {
   Vue.use(VeeValidate);

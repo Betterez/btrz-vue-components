@@ -2,7 +2,7 @@ import "./setup";
 
 import { expect } from "chai";
 import { insertHTML, mountComponent } from "./utils";
-const BtrzGrid = require("src/btrz-grid");
+import BtrzGrid from "../src/btrz-grid";
 
 
 describe("BtrzGrid", () => {

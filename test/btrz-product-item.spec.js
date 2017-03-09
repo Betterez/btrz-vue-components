@@ -2,7 +2,7 @@ import "./setup";
 
 import { expect } from "chai";
 import { mountComponent } from "./utils";
-const BtrzProductItem = require("src/btrz-product-item");
+import BtrzProductItem from "../src/btrz-product-item";
 
 
 describe("BtrzProductItem", () => {
