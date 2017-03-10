@@ -9,7 +9,6 @@
         {{ name }}
         <div class="fare-description">{{description}}</div>
       </div>
-
       <button class="plus-icon flex-item" @click="increment()">
         <i class="fa fa-plus-square-o"></i>
       </button>
@@ -23,7 +22,7 @@
     name: "BtrzFareItem",
     props: {
       name: {
-        type: String,
+        type: String
       },
       description: {
         type: String
@@ -36,33 +35,33 @@
         type: Number,
         "default": 0
       },
-      "initialValue":{
+      initialValue: {
         type: Number,
         "default": 0
       }
     },
 
-    data(){
+    data() {
       return {
         "quantity": this.initialValue
-      }
+      };
     },
 
     methods: {
-      increment(){
-        if ( this.quantity < this.max ) {
+      increment() {
+        if (this.quantity < this.max) {
           this.quantity++;
-          this.$emit('incremented');
+          this.$emit("incremented");
         }
       },
 
-      decrement(){
-        if ( this.quantity > this.min ) {
+      decrement() {
+        if (this.quantity > this.min) {
           this.quantity--;
-          this.$emit('decremented');
+          this.$emit("decremented");
         }
       }
 
     }
-  }
+  };
 </script>
