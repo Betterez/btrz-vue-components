@@ -1,14 +1,11 @@
 <template>
-  <div class="col-xs-12 col-sm-12 col-md-6">
-    <label class="hidden-xs"></label>
-    <div class="input-container">
-      <input name="inputValidate" class="form-control"
-        v-bind:type="type"
-        v-bind:placeholder="placeholder"
-        v-validate
-        v-bind:data-vv-rules="validations" />
-      <div v-show="errors.has('inputValidate')" class="error">{{ errors.first('inputValidate') }}</div>
-    </div>
+  <div class="input-container">
+    <input name="inputValidate" class="form-control"
+      v-bind:type="type"
+      v-bind:placeholder="placeholder"
+      v-validate
+      v-bind:data-vv-rules="validations" />
+    <div v-show="errors.has('inputValidate')" class="error">{{ errors.first('inputValidate') }}</div>
   </div>
 </template>
 

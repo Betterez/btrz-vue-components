@@ -25,4 +25,18 @@ describe("BtrzInput", () => {
     const input = $(".input-container input");
     expect(input.attr("placeholder")).to.equal("test placeholder");
   });
+
+  it("should render an input element with type prop text", () => {
+    insertHTML(`<div id="app">
+                  <btrz-input type='text'></btrz-input>
+                </div>`);
+
+    new Vue({
+      el: "#app",
+      components: { BtrzInput },
+    });
+
+    const input = $(".input-container input");
+    expect(input.attr("type")).to.equal("text");
+  });
 });
