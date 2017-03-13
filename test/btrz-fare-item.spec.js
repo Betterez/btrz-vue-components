@@ -86,4 +86,16 @@ describe("BtrzFareItem", () => {
     const spy = sinon.spy(vm, "$emit");
     expect(spy.calledWith("decremented"));
   });
+
+  it("should emit a 'incremented' event when increment is called", () => {
+    const vm = mountComponent(BtrzFareItem, {
+      name: "Test",
+      description: "A description",
+      initialValue: 1,
+      max: 10
+    });
+
+    const spy = sinon.spy(vm, "$emit");
+    expect(spy.calledWith("incremented"));
+  });
 });
