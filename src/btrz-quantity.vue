@@ -16,12 +16,14 @@
   </div>
 </template>
 
-
 <script>
   export default {
-    name: "BtrzFareItem",
+    name: "BtrzQuantity",
     props: {
       name: {
+        type: String
+      },
+      id: {
         type: String
       },
       description: {
@@ -51,14 +53,14 @@
       increment() {
         if (this.quantity < this.max) {
           this.quantity++;
-          this.$emit("incremented");
+          this.$emit("quantityChanged", {id: this.id, quantity: this.quantity});
         }
       },
 
       decrement() {
         if (this.quantity > this.min) {
           this.quantity--;
-          this.$emit("decremented");
+          this.$emit("quantityChanged", {id: this.id, quantity: this.quantity});
         }
       }
 
