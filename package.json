@@ -27,7 +27,7 @@
   "homepage": "https://github.com/Betterez/btrz-vue-components#readme",
   "dependencies": {
     "vee-validate": "^2.0.0-beta.24",
-    "vue": "^2.1.10"
+    "vue": "^2.2.4"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -49,7 +49,7 @@
     "mocha": "^3.2.0",
     "sinon": "^2.0.0-pre.6",
     "vue-loader": "^10.0.2",
-    "vue-template-compiler": "^2.1.8",
+    "vue-template-compiler": "^2.2.4",
     "webpack": "^1.14.0"
   }
 }
