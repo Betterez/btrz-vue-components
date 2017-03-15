@@ -1,7 +1,7 @@
 <template>
   <div class="fare-item">
     <div class="fare-detail flex-container">
-      <button class="minus-icon flex-item" @click="decrement()" >
+      <button class="minus-icon flex-item" type="button" @click="decrement()" >
         <i class="fa fa-minus-square-o"></i>
       </button>
       <div class="fare-title  flex-item">
@@ -9,7 +9,7 @@
         {{ name }}
         <div class="fare-description">{{description}}</div>
       </div>
-      <button class="plus-icon flex-item" @click="increment()">
+      <button class="plus-icon flex-item" type="button" @click="increment()">
         <i class="fa fa-plus-square-o"></i>
       </button>
     </div>
