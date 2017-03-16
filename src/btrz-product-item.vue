@@ -1,6 +1,6 @@
 <template>
-  <a v-bind:href="'./products/' + product._id" class="ellipsis btn btn-lg btn-default btn-block btn-product">
-    <i v-bind:class="'fa ' + icon"></i> {{ product.name }}
+  <a :href="`product/${product._id}`" class="ellipsis btn btn-lg btn-default btn-block btn-product">
+    <i :class="`fa ${icon}`"></i> {{ product.name }}
     <p class="ellipsis hidden-xs">{{ product.description }}</p>
   </a>
 </template>
