@@ -1,5 +1,5 @@
 module.exports = {
-  mountComponent: function (Component, props) {
+  mountComponent: function (Component, props = {}) {
     const Ctor = Vue.extend(Component),
       vm = new Ctor({propsData: props}).$mount();
     return vm;
