@@ -1,5 +1,5 @@
 <template>
-  <a :href="`product/${product._id}`" class="ellipsis btn btn-lg btn-default btn-block btn-product">
+  <a :href="productLink + '/product/' + product._id" class="ellipsis btn btn-lg btn-default btn-block btn-product">
     <i :class="`fa ${icon}`"></i> {{ product.name }}
     <p class="ellipsis hidden-xs">{{ product.description }}</p>
   </a>
@@ -8,7 +8,7 @@
 <script>
 export default {
   name: "BtrzProductItem",
-  props: ["product"],
+  props: ["product", "productLink"],
   computed: {
     icon() {
       return this.product.icon || "fa-ticket";
