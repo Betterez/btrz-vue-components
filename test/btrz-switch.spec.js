@@ -27,41 +27,44 @@ describe("BtrzSwitch", () => {
                   </btrz-switch>
                 </div>`);
 
-    let v = new Vue({
+    let vm = new Vue({
       el: '#app',
       components: { BtrzSwitch },
       data: {tripType: "roundtrip"}
     });
 
-    expect($(".selected").text()).to.include("Round Trip!");
+    const DEFAULT_PROPS = {
+      onValue: "oneway",
+      onText: "One Way!",
+      offValue: "roundtrip",
+      offText: "Round Trip!",
+      selectedValue: "roundtrip"
+    };
+
+    mountComponent(BtrzSwitch, DEFAULT_PROPS);
+
+    expect($(vm.$el).find(".selected").text()).to.include("Round Trip!");
   });
 
-  it.only("should update selected option", (done) => {
-    insertHTML(`<div id="app">
-                  <btrz-switch
-                    :on-value="'oneway'" :on-text="'One Way!'"
-                    :off-value="'roundtrip'" :off-text="'Round Trip!'"
-                    v-model="tripType">
-                  </btrz-switch>
-                </div>`);
+  it("should update selected option", (done) => {
+    const DEFAULT_PROPS = {
+      onValue: "oneway",
+      onText: "One Way!",
+      offValue: "roundtrip",
+      offText: "Round Trip!",
+      selectedValue: "roundtrip"
+    };
 
-    let v = new Vue({
-      el: '#app',
-      components: { BtrzSwitch },
-      data: {tripType: "roundtrip"}
-    });
+    const vm = mountComponent(BtrzSwitch, DEFAULT_PROPS);
 
-    expect($(".selected").text()).to.include("Round Trip!");
+    expect($(vm.$el).find(".selected")
+           .text().trim()).to.equal("Round Trip!");
 
-console.log("v.tripType", v.tripType);
-    v.tripType = "oneway";
-console.log("v.tripType", v.tripType);
+    vm.selected = "oneway";
 
-    v.$nextTick(function () {
-
-      console.log(this.$el.innerHTML);
-
-      expect($(".selected").text()).to.include("One Way!");
+    vm.$nextTick(() => {
+      expect($(vm.$el).find(".selected")
+             .text().trim()).to.equal("One Way!");
       done();
     });
   });

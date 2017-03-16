@@ -16,8 +16,8 @@
     name: "BtrzSwitch",
     props: ["selectedValue", "onValue", "onText", "offValue", "offText"],
     model: {
-      prop: 'selectedValue',
-      event: 'change'
+      prop: "selectedValue",
+      event: "change"
     },
     methods: {
       change (val) {

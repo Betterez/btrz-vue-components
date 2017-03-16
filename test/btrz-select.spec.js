@@ -4,7 +4,7 @@ import {expect} from "chai";
 import {mountComponent, insertHTML} from "./utils";
 import BtrzSelect from "../src/btrz-select";
 
-describe.only("BtrzSelect", () => {
+describe("BtrzSelect", () => {
   it("should render the default value", () => {
     const EXPECTED_DEFAULT = {text: "default_value", value: ""};
     const vm = mountComponent(BtrzSelect, {selectedOption: EXPECTED_DEFAULT});
