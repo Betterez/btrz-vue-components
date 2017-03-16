@@ -27,7 +27,7 @@ describe("BtrzGrid", () => {
       data: {things: [{name: "first"}, {name: "second"}]}
     });
 
-    const renderedChilds = $(".row a");
+    const renderedChilds = $("#app div div a");
     expect(renderedChilds).to.have.length(2);
     expect(renderedChilds.get(0).text).to.equal("first");
     expect(renderedChilds.get(1).text).to.equal("second");

@@ -9,9 +9,10 @@ describe("BtrzProductItem", () => {
 
   it("should render product link", () => {
     const product = {family: "reservation", _id: "123456789", icon: "fa-reservation"},
-      component = mountComponent(BtrzProductItem, {product});
+      productLink = "cart/accountId",
+      component = mountComponent(BtrzProductItem, {product, productLink});
 
-    expect(component.$el.href).to.be.eql("./products/123456789");
+    expect(component.$el.href).to.be.eql("cart/accountId/product/123456789");
   });
 
   it("should render product icon", () => {
