@@ -45,7 +45,18 @@ describe("BtrzSelect", () => {
     });
 
     availableOptions = availableOptions.toArray();
-
     expect(availableOptions).to.deep.equal(EXPECTED_OPTIONS);
+  });
+
+  it("should emit change event with new selected value", (done) => {
+    const component = mountComponent(BtrzSelect);
+
+    component.$on("change", (val) => {
+      expect(val).to.equal("newval");
+      done();
+    });
+
+    component.selected = "newval";
+    component.change();
   });
 });

@@ -1,5 +1,5 @@
 <template>
-  <select class="form-control col-xs-2 chevron-down-bkg">
+  <select @change="change" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
     <option :value="selectedOption.value">{{ selectedOption.text }}</option>
     <option v-for="option in options" :value="option.value">
       {{option.text}}
@@ -19,6 +19,18 @@
         type: Array,
         "default": () => { return []; }
       }
+    },
+    model: {
+      prop: "selected",
+      event: "change"
+    },
+    methods: {
+      change() {
+        this.$emit("change", this.selected);
+      }
+    },
+    data() {
+      return {selected: this.selectedOption.value};
     }
   };
 </script>
