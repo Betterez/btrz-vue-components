@@ -1,10 +1,13 @@
 <template>
-  <select @change="change" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
-    <option :value="selectedOption.value">{{ selectedOption.text }}</option>
-    <option v-for="option in options" :value="option.value">
-      {{option.text}}
-    </option>
-  </select>
+  <div>
+    <select @change="change" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
+      <option :value="selectedOption.value">{{ selectedOption.text }}</option>
+      <option v-for="option in options" :value="option.value">
+        {{option.text}}
+      </option>
+    </select>
+    <div class="error hidden" title="required">Required</div>
+  </div>
 </template>
 
 <script>
