@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <select @change="change" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
-      <option :value="selectedOption.value">{{ selectedOption.text }}</option>
+  <div class="au-target input-container">
+    <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
+      <option class="au-target" :value="selectedOption.value">{{ selectedOption.text }}</option>
       <option v-for="option in options" :value="option.value">
         {{option.text}}
       </option>
@@ -16,7 +16,6 @@
     props: {
       selectedOption: {
         type: Object,
-        //        default: () => { return {text: "", value: ""}; }
         default: null
       },
       options: {
@@ -34,6 +33,7 @@
     },
     created() {
       this.selectedOption = this.selectedOption || {text: this.placeholder, value: ""};
+      this.selected = this.selectedOption.value;
     },
     methods: {
       change() {
