@@ -5,14 +5,14 @@ import {mountComponent, insertHTML} from "./utils";
 import BtrzSelect from "../src/btrz-select";
 
 describe("BtrzSelect", () => {
-  it("should render the default value", () => {
-    const EXPECTED_DEFAULT = {text: "default_value", value: ""};
-    const vm = mountComponent(BtrzSelect, {selectedOption: EXPECTED_DEFAULT});
-    const optionEl = $(vm.$el).find("option[value='']");
-    // eslint-disable-next-line no-unused-expressions
-    expect(optionEl).to.be.ok;
-    expect(optionEl.text()).to.equal(EXPECTED_DEFAULT.text);
-    expect(optionEl.val()).to.equal(EXPECTED_DEFAULT.value);
+  it("should select the default value", () => {
+    const EXPECTED_VALUE = "default_value";
+    const vm = mountComponent(BtrzSelect, {
+      selectedValue: EXPECTED_VALUE,
+      options: [{text: "test description", value: "default_value"}]
+    });
+
+    expect(vm.selected).to.equal(EXPECTED_VALUE);
   });
 
   it("should render the default value empty if not specified", () => {

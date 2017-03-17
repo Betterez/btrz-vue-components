@@ -1,7 +1,7 @@
 <template>
   <div class="au-target input-container">
     <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
-      <option class="au-target" :value="selectedOption.value">{{ selectedOption.text }}</option>
+      <option class="au-target" value="">{{ placeholder }}</option>
       <option v-for="option in options" :value="option.value">
         {{option.text}}
       </option>
@@ -14,9 +14,9 @@
   export default {
     name: "BtrzSelect",
     props: {
-      selectedOption: {
-        type: Object,
-        default: null
+      selectedValue: {
+        type: String,
+        "default": ""
       },
       options: {
         type: Array,
@@ -24,16 +24,12 @@
       },
       placeholder: {
         type: String,
-        default: ""
+        "default": ""
       }
     },
     model: {
       prop: "selected",
       event: "change"
-    },
-    created() {
-      this.selectedOption = this.selectedOption || {text: this.placeholder, value: ""};
-      this.selected = this.selectedOption.value;
     },
     methods: {
       change() {
@@ -41,7 +37,7 @@
       }
     },
     data() {
-      return {selected: null};
+      return {selected: this.selectedValue};
     }
   };
 </script>
