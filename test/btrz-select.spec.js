@@ -26,6 +26,19 @@ describe("BtrzSelect", () => {
     expect(optionEl.text()).to.equal(EXPECTED_DEFAULT);
   });
 
+  it("should render the placeholder when no option is selected", () => {
+    const EXPECTED_PLACEHOLDER = "test placeholder";
+
+    const vm = mountComponent(BtrzSelect, {
+      placeholder: EXPECTED_PLACEHOLDER
+    });
+
+    const optionEl = $(vm.$el).find("option[value='']");
+    // eslint-disable-next-line no-unused-expressions
+    expect(optionEl).to.be.ok;
+    expect(optionEl.text()).to.equal(EXPECTED_PLACEHOLDER);
+  });
+
   it("should render the given options", () => {
     const EXPECTED_OPTIONS = [
       {text: "", value: ""},

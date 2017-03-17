@@ -16,16 +16,24 @@
     props: {
       selectedOption: {
         type: Object,
-        "default": () => { return {text: "", value: ""}; }
+        //        default: () => { return {text: "", value: ""}; }
+        default: null
       },
       options: {
         type: Array,
         "default": () => { return []; }
+      },
+      placeholder: {
+        type: String,
+        default: ""
       }
     },
     model: {
       prop: "selected",
       event: "change"
+    },
+    created() {
+      this.selectedOption = this.selectedOption || {text: this.placeholder, value: ""};
     },
     methods: {
       change() {
@@ -33,7 +41,7 @@
       }
     },
     data() {
-      return {selected: this.selectedOption.value};
+      return {selected: null};
     }
   };
 </script>
