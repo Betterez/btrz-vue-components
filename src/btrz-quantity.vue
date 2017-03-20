@@ -20,35 +20,18 @@
   export default {
     name: "BtrzQuantity",
     props: {
-      name: {
-        type: String
-      },
-      id: {
-        type: String
-      },
-      description: {
-        type: String
-      },
-      max: {
-        type: Number,
-        required: true
-      },
-      min: {
-        type: Number,
-        "default": 0
-      },
-      initialValue: {
-        type: Number,
-        "default": 0
-      }
+      id: {type: String},
+      name: {type: String},
+      description: {type: String},
+      max: {type: Number, required: true},
+      min: {type: Number, "default": 0},
+      initialValue: {type: Number, "default": 0}
     },
-
     data() {
       return {
         "quantity": this.initialValue
       };
     },
-
     methods: {
       increment() {
         if (this.quantity < this.max) {
@@ -56,14 +39,12 @@
           this.$emit("quantityChanged", {id: this.id, quantity: this.quantity});
         }
       },
-
       decrement() {
         if (this.quantity > this.min) {
           this.quantity--;
           this.$emit("quantityChanged", {id: this.id, quantity: this.quantity});
         }
       }
-
-    }
+    },
   };
 </script>
