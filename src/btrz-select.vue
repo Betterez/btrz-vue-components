@@ -1,9 +1,9 @@
 <template>
   <div class="au-target input-container">
-    <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg">
+    <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
       <option class="au-target" value="">{{ placeholder }}</option>
       <option v-for="option in options" :value="option.value">
-        {{option.text}}
+        {{ option.text }}
       </option>
     </select>
     <div class="error hidden" title="required">Required</div>
@@ -25,6 +25,10 @@
       placeholder: {
         type: String,
         "default": ""
+      },
+      disabled: {
+        type: Boolean,
+        "default": false
       }
     },
     model: {

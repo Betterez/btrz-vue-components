@@ -39,6 +39,18 @@ describe("BtrzSelect", () => {
     expect(optionEl.text()).to.equal(EXPECTED_PLACEHOLDER);
   });
 
+  it("should render the disabled if specified", () => {
+
+    const vm = mountComponent(BtrzSelect, {
+      diabled: true
+    });
+
+    const optionEl = $(vm.$el).find("select:disabled");
+    // eslint-disable-next-line no-unused-expressions
+    expect(optionEl).to.be.ok;
+  });
+
+
   it("should render the given options", () => {
     const EXPECTED_OPTIONS = [
       {text: "", value: ""},
