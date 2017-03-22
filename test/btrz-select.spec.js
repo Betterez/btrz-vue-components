@@ -74,14 +74,14 @@ describe("BtrzSelect", () => {
   });
 
   it("should emit change event with new selected value", (done) => {
+    const EXPECTED_SELECTION = "newval";
     const component = mountComponent(BtrzSelect);
 
     component.$on("change", (val) => {
-      expect(val).to.equal("newval");
+      expect(val).to.equal(EXPECTED_SELECTION);
       done();
     });
 
-    component.selected = "newval";
-    component.change();
+    component.change(EXPECTED_SELECTION);
   });
 });

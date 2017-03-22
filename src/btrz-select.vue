@@ -1,5 +1,5 @@
 <template>
-  <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
+  <select @change="propagateChange($event.target.value)" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
     <option value="">{{ placeholder }}</option>
     <option v-for="option in options" :value="option.value">
       {{ option.text }}
@@ -29,12 +29,12 @@
       }
     },
     model: {
-      prop: "selected",
+      prop: "selectedValue",
       event: "change"
     },
     methods: {
-      change() {
-        this.$emit("change", this.selected);
+      propagateChange(newValue) {
+        this.$emit("change", newValue);
       }
     },
     data() {
