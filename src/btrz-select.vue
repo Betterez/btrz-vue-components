@@ -1,13 +1,10 @@
 <template>
-  <div class="au-target input-container">
-    <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
-      <option class="au-target" value="">{{ placeholder }}</option>
-      <option v-for="option in options" :value="option.value">
-        {{ option.text }}
-      </option>
-    </select>
-    <div class="error hidden" title="required">Required</div>
-  </div>
+  <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
+    <option class="au-target" value="">{{ placeholder }}</option>
+    <option class="au-target" v-for="option in options" :value="option.value">
+      {{ option.text }}
+    </option>
+  </select>
 </template>
 
 <script>
