@@ -1,7 +1,7 @@
 <template>
   <select @change="change" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
-    <option class="au-target" value="">{{ placeholder }}</option>
-    <option class="au-target" v-for="option in options" :value="option.value">
+    <option value="">{{ placeholder }}</option>
+    <option v-for="option in options" :value="option.value">
       {{ option.text }}
     </option>
   </select>
