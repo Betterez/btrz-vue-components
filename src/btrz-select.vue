@@ -37,13 +37,14 @@
         this.$emit("change", newValue);
       }
     },
-    watch: {
-      selectedValue: function(newSelected) {
-        this.selected = newSelected;
+
+    computed: {
+      selected() {
+        return this.selectedValue;
       }
     },
     data() {
-      return {selected: this.selectedValue};
+      return { };
     }
   };
 </script>
