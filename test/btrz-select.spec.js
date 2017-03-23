@@ -2,6 +2,7 @@ import "./setup";
 
 import {expect} from "chai";
 import {mountComponent} from "./utils";
+import {asd} from "../src/btrz-select";
 import BtrzSelect from "../src/btrz-select";
 
 const DUMMY_OPTIONS = [
@@ -108,5 +109,9 @@ describe("BtrzSelect", () => {
         expect(selectEl.val()).to.equal(DUMMY_OPTIONS[2].value);
       });
     });
+  });
+
+  it("should correctly validate option list when it contains value and text keys", () => {
+    expect(BtrzSelect.hasTextAndValue(DUMMY_OPTIONS)).to.equal(true);
   });
 });

@@ -8,6 +8,11 @@
 </template>
 
 <script>
+
+  function hasTextAndValue(optionList) {
+    optionList.every((option) => option.hasOwnProperty("text"));
+  };
+
   export default {
     name: "BtrzSelect",
     props: {
@@ -17,7 +22,8 @@
       },
       options: {
         type: Array,
-        "default": () => { return []; }
+        "default": () => { return []; },
+        validation: hasTextAndValue
       },
       defaultOption: {
         type: Object,
@@ -33,6 +39,7 @@
       event: "change"
     },
     methods: {
+      hasTextAndValue: hasTextAndValue,
       propagateChange(newValue) {
         this.$emit("change", newValue);
       }
