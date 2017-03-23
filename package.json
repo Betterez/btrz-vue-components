@@ -1,6 +1,6 @@
 {
   "name": "btrz-vue-components",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A collection of Vue components used in the Betterez UI",
   "main": "index.js",
   "directories": {
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack --config ./webpack.config.js --progress --hide-modules",
+    "test-w": "npm run build && mocha -r jsdom-global/register ./dist/bundle.js -w",
     "test": "npm run build && mocha -r jsdom-global/register ./dist/bundle.js"
   },
   "repository": {
@@ -26,7 +27,6 @@
   },
   "homepage": "https://github.com/Betterez/btrz-vue-components#readme",
   "dependencies": {
-    "vee-validate": "^2.0.0-beta.24",
     "vue": "^2.2.4"
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "chai": "^3.5.0",
     "css-loader": "^0.26.1",
+    "eslint": "^3.18.0",
     "eslint-config-standard": "^7.0.1",
     "eslint-plugin-html": "^2.0.1",
     "eslint-plugin-mocha": "^4.8.0",

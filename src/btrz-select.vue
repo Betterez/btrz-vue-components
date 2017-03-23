@@ -1,8 +1,8 @@
 <template>
-  <select @change="propagateChange($event.target.value)" :placeholder="placeholder" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
-    <option value="">{{ placeholder }}</option>
+  <select @change="propagateChange($event.target.value)" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
+    <option value="" v-if="defaultOption" :value="defaultOption.value">{{defaultOption.text}}</option>
     <option v-for="option in options" :value="option.value">
-      {{ option.text }}
+      {{option.text}}
     </option>
   </select>
 </template>
@@ -19,9 +19,9 @@
         type: Array,
         "default": () => { return []; }
       },
-      placeholder: {
-        type: String,
-        "default": ""
+      defaultOption: {
+        type: Object,
+        default: null
       },
       disabled: {
         type: Boolean,

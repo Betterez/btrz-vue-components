@@ -77,14 +77,13 @@ describe("BtrzQuantity", () => {
 
   it("should emit a 'quantityChanged' event when decrement is called", () => {
     const vm = mountComponent(BtrzQuantity, {
-      name: "Test",
-      description: "A description",
-      initialValue: 1,
-      max: 10,
-      id: "1"
-    });
-
-    const spy = sinon.spy(vm, "$emit");
+        name: "Test",
+        description: "A description",
+        initialValue: 1,
+        max: 10,
+        id: "1"
+      }),
+      spy = sinon.spy(vm, "$emit");
     vm.decrement();
     expect(spy.calledWith("quantityChanged")).to.equal(true);
     expect(spy.firstCall.args[1].quantity).to.equal(0);
@@ -92,14 +91,13 @@ describe("BtrzQuantity", () => {
 
   it("should emit a 'quantityChanged' event when increment is called", () => {
     const vm = mountComponent(BtrzQuantity, {
-      name: "Test",
-      description: "A description",
-      initialValue: 1,
-      max: 10,
-      id: "1"
-    });
-
-    const spy = sinon.spy(vm, "$emit");
+        name: "Test",
+        description: "A description",
+        initialValue: 1,
+        max: 10,
+        id: "1"
+      }),
+      spy = sinon.spy(vm, "$emit");
     vm.increment();
     expect(spy.calledWith("quantityChanged")).to.equal(true);
     expect(spy.firstCall.args[1].quantity).to.equal(2);

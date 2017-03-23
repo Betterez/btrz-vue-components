@@ -1,11 +1,9 @@
 <template>
   <div class="btn-group toggle-wrapper" role="group">
-    <div v-bind:class="{selected: this.selected === this.onValue}"
-         v-on:click="change(onValue)">
+    <div v-bind:class="{selected: this.selected === this.onValue, first: true}" v-on:click="handleClick(onValue)">
       {{ onText }}
     </div>
-    <div v-bind:class="{selected: this.selected === this.offValue}"
-         v-on:click="change(offValue)">
+    <div v-bind:class="{selected: this.selected === this.offValue, second: true}" v-on:click="handleClick(offValue)">
       {{ offText }}
     </div>
   </div>
@@ -20,7 +18,7 @@
       event: "change"
     },
     methods: {
-      change (val) {
+      handleClick (val) {
         this.selected = val;
         this.$emit("change", val);
       }

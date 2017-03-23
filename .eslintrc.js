@@ -9,7 +9,9 @@ module.exports = {
     "browser": true
   },
   "globals": {
-    "browser": true
+    "browser": true,
+    "Vue": true,
+    "$": true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: "standard",

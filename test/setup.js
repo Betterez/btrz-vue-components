@@ -1,4 +1,4 @@
 
-afterEach(function () {
+afterEach(() => {
   document.body.innerHTML = "";
 });

@@ -1,87 +1,71 @@
 import "./setup";
 
 import {expect} from "chai";
-import {mountComponent, insertHTML} from "./utils";
+import {mountComponent} from "./utils";
 import BtrzSelect from "../src/btrz-select";
 
 describe("BtrzSelect", () => {
   it("should select the default value", () => {
-    const EXPECTED_VALUE = "default_value";
-    const vm = mountComponent(BtrzSelect, {
-      selectedValue: EXPECTED_VALUE,
-      options: [{text: "test description", value: "default_value"}]
-    });
+    const EXPECTED_VALUE = "default_value",
+      vm = mountComponent(BtrzSelect, {
+        selectedValue: EXPECTED_VALUE
+      });
 
     expect(vm.selected).to.equal(EXPECTED_VALUE);
   });
 
   it("should render the default value empty if not specified", () => {
-    const EXPECTED_DEFAULT = "";
+    const EXPECTED_DEFAULT = "",
+      vm = mountComponent(BtrzSelect),
+      optionEl = $(vm.$el).find("option[value='']");
 
-    const vm = mountComponent(BtrzSelect);
-
-    const optionEl = $(vm.$el).find("option[value='']");
-    // eslint-disable-next-line no-unused-expressions
-    expect(optionEl).to.be.ok;
     expect(optionEl.text()).to.equal(EXPECTED_DEFAULT);
   });
 
-  it("should render the placeholder when no option is selected", () => {
-    const EXPECTED_PLACEHOLDER = "test placeholder";
-
-    const vm = mountComponent(BtrzSelect, {
-      placeholder: EXPECTED_PLACEHOLDER
-    });
-
-    const optionEl = $(vm.$el).find("option[value='']");
-    // eslint-disable-next-line no-unused-expressions
-    expect(optionEl).to.be.ok;
-    expect(optionEl.text()).to.equal(EXPECTED_PLACEHOLDER);
-  });
-
   it("should render the disabled if specified", () => {
-
     const vm = mountComponent(BtrzSelect, {
-      diabled: true
+      disabled: true
     });
 
-    const optionEl = $(vm.$el).find("select:disabled");
-    // eslint-disable-next-line no-unused-expressions
-    expect(optionEl).to.be.ok;
+    expect($(vm.$el).attr("disabled")).to.be.eql("disabled");
   });
 
+  it("should render the default option", () => {
+    const DEFAULT_OPTION = {text: "All", value: "all"},
+      vm = mountComponent(BtrzSelect, {defaultOption: DEFAULT_OPTION}),
+      optionsEl = $(vm.$el).find("option"),
+      availableOptions = optionsEl.map((idx, option) => {
+        return {text: option.text.trim(), value: option.value.trim()};
+      }).toArray();
+
+    expect(availableOptions.length).to.be.eql(1);
+    expect(availableOptions[0]).to.deep.equal(DEFAULT_OPTION);
+  });
 
   it("should render the given options", () => {
     const EXPECTED_OPTIONS = [
-      {text: "", value: ""},
-      {text: "option1", value: "value1"},
-      {text: "option2", value: "value2"},
-      {text: "option3", value: "value3"}
-    ];
+        {text: "option1", value: "value1"},
+        {text: "option2", value: "value2"},
+        {text: "option3", value: "value3"}
+      ],
+      vm = mountComponent(BtrzSelect, {options: EXPECTED_OPTIONS}),
+      optionsEl = $(vm.$el).find("option"),
+      availableOptions = optionsEl.map((idx, option) => {
+        return {text: option.text.trim(), value: option.value.trim()};
+      }).toArray();
 
-    const vm = mountComponent(BtrzSelect, {options: EXPECTED_OPTIONS.slice(1)});
-    // eslint-disable-next-line no-unused-expressions
-    const optionsEl = $(vm.$el).find("option");
-
-    expect(optionsEl).to.be.ok;
-
-    let availableOptions = optionsEl.map((idx, option) => {
-      return {text: option.text.trim(), value: option.value.trim()};
-    });
-
-    availableOptions = availableOptions.toArray();
     expect(availableOptions).to.deep.equal(EXPECTED_OPTIONS);
   });
 
   it("should emit change event with new selected value", (done) => {
-    const EXPECTED_SELECTION = "newval";
-    const component = mountComponent(BtrzSelect);
+    const EXPECTED_SELECTION = "newVal",
+      vm = mountComponent(BtrzSelect);
 
-    component.$on("change", (val) => {
+    vm.$on("change", (val) => {
       expect(val).to.equal(EXPECTED_SELECTION);
       done();
     });
 
-    component.change(EXPECTED_SELECTION);
+    vm.propagateChange(EXPECTED_SELECTION);
   });
 });
