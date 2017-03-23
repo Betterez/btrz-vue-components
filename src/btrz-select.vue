@@ -37,6 +37,11 @@
         this.$emit("change", newValue);
       }
     },
+    watch: {
+      selectedValue: function(newSelected) {
+        this.selected = newSelected;
+      }
+    },
     data() {
       return {selected: this.selectedValue};
     }
