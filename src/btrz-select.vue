@@ -1,3 +1,4 @@
+
 <template>
   <select @change="propagateChange($event.target.value)" v-model="selected" class="form-control col-xs-2 chevron-down-bkg" :disabled="disabled">
     <option value="" v-if="defaultOption" :value="defaultOption.value">{{defaultOption.text}}</option>
@@ -10,7 +11,9 @@
 <script>
 
   function hasTextAndValue(optionList) {
-    optionList.every((option) => option.hasOwnProperty("text"));
+    return optionList.every(
+      (option) => "text" in option && "value" in option
+    );
   };
 
   export default {
@@ -22,12 +25,13 @@
       },
       options: {
         type: Array,
-        "default": () => { return []; },
+        "default": () => [],
         validation: hasTextAndValue
       },
       defaultOption: {
         type: Object,
-        default: null
+        default: null,
+        validation: hasTextAndValue
       },
       disabled: {
         type: Boolean,
@@ -39,7 +43,8 @@
       event: "change"
     },
     methods: {
-      hasTextAndValue: hasTextAndValue,
+      // Just using for testing
+      hasTextAndValue,
       propagateChange(newValue) {
         this.$emit("change", newValue);
       }
@@ -54,4 +59,5 @@
       return { };
     }
   };
+
 </script>

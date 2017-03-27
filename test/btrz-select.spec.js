@@ -2,7 +2,6 @@ import "./setup";
 
 import {expect} from "chai";
 import {mountComponent} from "./utils";
-import {asd} from "../src/btrz-select";
 import BtrzSelect from "../src/btrz-select";
 
 const DUMMY_OPTIONS = [
@@ -64,11 +63,10 @@ describe("BtrzSelect", () => {
     expect(availableOptions).to.deep.equal(DUMMY_OPTIONS);
   });
 
-  it("should support v-model binding", () => {
+  describe("should support v-model binding", () => {
     const V_MODEL_EVENT = "change";
-
     it("should be configured to emit the defined event", () => {
-      expect(BtrzSelect.model.event).to.be(V_MODEL_EVENT);
+      expect(BtrzSelect.model.event).to.equal(V_MODEL_EVENT);
     });
 
     it("should emit change event with new selected value", (done) => {
@@ -111,7 +109,36 @@ describe("BtrzSelect", () => {
     });
   });
 
-  it("should correctly validate option list when it contains value and text keys", () => {
-    expect(BtrzSelect.hasTextAndValue(DUMMY_OPTIONS)).to.equal(true);
+  describe("hasTextAndValue", () => {
+    it("should correctly validate option list when it contains value and text keys", () => {
+      expect(BtrzSelect.methods.hasTextAndValue(DUMMY_OPTIONS)).to.equal(true);
+    });
+
+    it("should not validate if the option list not contains text", () => {
+      const actual = BtrzSelect.methods.hasTextAndValue([
+        {value: "test value", text: "test text"},
+        {value: "test value2", otherKey: "test key"}
+      ]);
+
+      expect(actual).to.equal(false);
+    });
+
+    it("should not validate if the option list not contains value", () => {
+      const actual = BtrzSelect.methods.hasTextAndValue([
+        {text: "test1", value: "value key"},
+        {text: "test2", otherKey: "test key"}
+      ]);
+
+      expect(actual).to.equal(false);
+    });
+
+    it("should not validate one of the options not contains value and text", () => {
+      const actual = BtrzSelect.methods.hasTextAndValue([
+        {text: "test1", value: "test key"},
+        {otherKey: "test key"}
+      ]);
+
+      expect(actual).to.equal(false);
+    });
   });
 });
