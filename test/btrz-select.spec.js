@@ -36,9 +36,9 @@ describe("BtrzSelect", () => {
     expect($(vm.$el).attr("disabled")).to.be.eql("disabled");
   });
 
-  it("should render the default option", () => {
+  it("should render the first option if specified", () => {
     const DEFAULT_OPTION = {text: "All", value: "all"},
-      vm = mountComponent(BtrzSelect, {defaultOption: DEFAULT_OPTION}),
+      vm = mountComponent(BtrzSelect, {firstOption: DEFAULT_OPTION}),
       optionsEl = $(vm.$el).find("option"),
       availableOptions = optionsEl.map((idx, option) => {
         return {text: option.text.trim(), value: option.value.trim()};
@@ -70,8 +70,8 @@ describe("BtrzSelect", () => {
     });
 
     it("should emit change event with new selected value", (done) => {
-      const EXPECTED_SELECTION = "newVal";
-      const vm = mountComponent(BtrzSelect);
+      const EXPECTED_SELECTION = DUMMY_OPTIONS[1].value;
+      const vm = mountComponent(BtrzSelect, {options: DUMMY_OPTIONS});
 
       vm.$on(V_MODEL_EVENT, (val) => {
         expect(val).to.equal(EXPECTED_SELECTION);
