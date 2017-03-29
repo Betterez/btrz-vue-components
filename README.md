@@ -17,6 +17,10 @@ All components must begin with the **"Btrz" prefix**.
 
 ### Component's styles
 
-Only the compontent specific styles should be inside the compontent file.
+Only the compontent specific styles should be inside the component file.
 
 Other non specific styles should be under the /assets/css/ folder, following the [ITCSS standard](https://speakerdeck.com/dafed/managing-css-projects-with-itcss).
+
+### Internationalization support
+
+Components in btrz-vue-components should expect a $t method available on the component instance. This method accepts a lexicon key, and returns the corresponding translation. It is up to each project using the components to provide this $t method. For instance btrz-vue-websales does it using vuex-i18n plugin.
