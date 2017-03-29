@@ -4,7 +4,9 @@
       :name="name"
       :type="type"
       :placeholder="placeholder"
-      @input="$emit('input', $event.target.value)"/>
+      @input="$emit('input', $event.target.value)"
+      @blur="$emit('blur', $event.target.value)"
+      @focus="$emit('focus', $event.target.value)"/>
   </div>
 </template>
 

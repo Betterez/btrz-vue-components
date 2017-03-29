@@ -1,7 +1,7 @@
 <template>
   <a :href="`${this.baseUrl}/${this.product.family}/${this.product._id}`" class="ellipsis btn btn-lg btn-default btn-block btn-product">
-    <i :class="`fa ${icon}`"></i> {{ product.name }}
-    <p class="ellipsis hidden-xs">{{ product.description }}</p>
+    <i :class="`fa ${icon}`"></i> {{ $t(product.lexiconKeys.name) }}
+    <p class="ellipsis hidden-xs">{{ $t(product.lexiconKeys.description) }}</p>
   </a>
 </template>
 
