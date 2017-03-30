@@ -3,6 +3,7 @@
     <input class="form-control"
       :name="name"
       :type="type"
+      :value="value"
       :placeholder="placeholder"
       @input="$emit('input', $event.target.value)"
       @blur="$emit('blur', $event.target.value)"
@@ -13,6 +14,6 @@
 <script>
   export default {
     name: "BtrzInput",
-    props: ["placeholder", "type", "name"]
+    props: ["placeholder", "type", "name", "value"]
   }
 </script>
