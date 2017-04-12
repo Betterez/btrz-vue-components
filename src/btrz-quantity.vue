@@ -6,7 +6,7 @@
       </button>
       <div class="fare-title  flex-item">
         <input type="text" v-model="quantity" :name="name" readonly/>
-        {{ name }}
+        {{ title }}
         <div class="fare-description">{{description}}</div>
       </div>
       <button class="plus-icon flex-item" type="button" @click="increment()">
@@ -22,6 +22,7 @@
     props: {
       id: {type: String},
       name: {type: String},
+      title: {type: String},
       description: {type: String},
       max: {type: Number, required: true},
       min: {type: Number, "default": 0},
