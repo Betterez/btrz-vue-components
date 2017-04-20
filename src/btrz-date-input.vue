@@ -4,7 +4,7 @@
            ref="input"
            :id="id"
            :disabled="disabled"/>
-    <input type="hidden" :name="name" />
+    <input type="hidden" :name="name" :value="value" />
   </div>
 </template>
 
