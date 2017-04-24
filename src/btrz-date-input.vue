@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <input class="form-control calendar-bkg"
-           ref="input"
-           :id="id"
-           :disabled="disabled"/>
-    <input type="hidden" :name="name" :value="value" />
-  </div>
+  <input class="form-control calendar-bkg"
+         ref="input"
+         :id="id"
+         :disabled="disabled"/>
 </template>
 
 <script>

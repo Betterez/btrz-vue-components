@@ -1,5 +1,4 @@
 <template>
-  <div class="input-container">
     <input class="form-control"
       :name="name"
       :type="type"
@@ -8,7 +7,6 @@
       @input="$emit('input', $event.target.value)"
       @blur="$emit('blur', $event.target.value)"
       @focus="$emit('focus', $event.target.value)"/>
-  </div>
 </template>
 
 <script>
