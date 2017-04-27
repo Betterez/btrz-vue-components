@@ -1,5 +1,6 @@
 <template>
     <input class="form-control"
+      :id="id"
       :name="name"
       :type="type"
       :value="value"
