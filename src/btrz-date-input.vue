@@ -50,7 +50,7 @@
       name: {type: String},
       "value": {"default": null},
       // value: Supports setting Date, [YEAR, MONTH, DAY], timestamp (int) or string matching submitFormat
-      displayFormat: {type: String, "default": "d mmmm, yyyy"}, // Pickadate format
+      displayFormat: {type: String, "default": "dd mmmm, yyyy"}, // Pickadate format
       submitFormat: {type: String, "default": "YYYY-MM-DD"}, // Momentjs format
       minDate: {"default": false},
       lang: {type: String, required: true},
