@@ -2,9 +2,9 @@
   <li>
     <div class="col-xs-7 col-sm-4">
       <div class="small-text">{{trip.segments[0].departureDate}}</div>
-      <div class="big-text">{{trip.departure}} <span>{{trip.from}}</span></div>
+      <div class="big-text">{{trip.departure | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.from}}</span></div>
       <i class="fa fa-arrow-down fromto-arrow fa-lg"></i>
-      <div class="big-text">{{trip.arrival}} <span>{{trip.to}}</span></div>
+      <div class="big-text">{{trip.arrival | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.to}}</span></div>
     </div>
     <div class="travel-time-column text-right col-xs-5 col-sm-2">
       <a class="check-trip phone trip-selection" @click="$emit('tripSelected', trip)"><i class="fa fa-check large-faicon"></i></a>
@@ -27,6 +27,6 @@
 <script>
   export default {
     name: "BtrzTripResult",
-    props: ["trip", "index", "currency"]
+    props: ["trip", "index", "currency", "accountPreferences"]
   }
 </script>
