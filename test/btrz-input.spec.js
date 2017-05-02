@@ -14,7 +14,7 @@ describe("BtrzInput", () => {
         el: "#app",
         components: {BtrzInput}
       }),
-      input = $(".input-container input");
+      input = $(".form-control");
 
     expect(input.attr("placeholder")).to.equal("test placeholder");
   });
@@ -28,7 +28,7 @@ describe("BtrzInput", () => {
         el: "#app",
         components: {BtrzInput}
       }),
-      input = $(".input-container input");
+      input = $(".form-control");
     expect(input.attr("type")).to.equal("text");
   });
 });
