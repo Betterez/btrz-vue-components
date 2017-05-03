@@ -3,6 +3,9 @@
     <div v-for="item in items" :class="itemClass ? itemClass : 'col-xs-12 col-sm-6 ' + colSpan">
       <slot :item="item"></slot>
     </div>
+    <div v-if="this.$slots.last" :class="itemClass ? itemClass : 'col-xs-12 col-sm-6 ' + colSpan">
+      <slot name="last"></slot>
+    </div>
   </div>
 </template>
 
