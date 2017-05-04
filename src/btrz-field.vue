@@ -6,7 +6,7 @@
         'input--empty': isEmpty,
         'input--filled': !isEmpty
       }">
-      <label :for="name">
+      <label :for="id">
         <span v-if="label">{{name}}:</span>
         <span v-if="!label">&nbsp;</span>
       </label>
@@ -18,6 +18,7 @@
   export default {
     name: "BtrzField",
     props: {
+      id: String,
       name: String,
       type: String,
       value: String,
