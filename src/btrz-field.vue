@@ -6,6 +6,10 @@
         'input--empty': isEmpty,
         'input--filled': !isEmpty
       }">
+      <label :for="name">
+        <span v-if="label">{{name}}:</span>
+        <span v-if="!label">&nbsp;</span>
+      </label>
     <slot :props="getProps()"></slot>
   </div>
 </template>
@@ -13,8 +17,14 @@
 <script>
   export default {
     name: "BtrzField",
-    props: ["name", "type", "value", "props"],
+    props: {
+      name: String,
+      type: String,
+      value: String,
+      label: Boolean
+    },
     created() {
+      this.checkIfEmpty(this.value);
       this.$on('childValueUpdated', function(value) {
         this.checkIfEmpty(value);
       })
