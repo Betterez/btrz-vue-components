@@ -21,7 +21,7 @@ Other prefixes shall be used as needed, the only consideration being that they s
 
 Only the compontent specific styles should be inside the component file.
 
-Use <style scoped>, but be aware that this prevents others from overriding the component's styles.
+Use [<style scoped>](https://vue-loader.vuejs.org/en/features/scoped-css.html), but be aware that this prevents others from overriding the component's styles.
 
 Other non specific styles, shared between components, should be under the /assets/css/ folder, following the [ITCSS standard](https://speakerdeck.com/dafed/managing-css-projects-with-itcss). ** not yet implemented **
 
