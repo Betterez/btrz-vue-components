@@ -137,11 +137,11 @@
           if (this.submitFormat) {
             date = moment(newDate, this.submitFormat);
             if (!date.isValid()) {
-              throw date.toString();
+              throw new Error(date.toString());
             }
             date = date.toDate();
           } else {
-            throw "No submitFormat specified for this date";
+            throw new Error("No submitFormat specified for this date");
           }
         } else if (newDate === null) {
           date = null;
