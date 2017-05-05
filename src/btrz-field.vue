@@ -7,10 +7,15 @@
         'input--filled': !isEmpty
       }">
       <label :for="id">
-        <span v-if="label">{{name}}:</span>
+        <span v-if="label && label.length > 0">{{label}}:</span>
         <span v-if="!label">&nbsp;</span>
       </label>
-    <slot :props="getProps()"></slot>
+    <slot></slot>
+    <div>
+      <div class="error">
+        ERRORS
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,35 +23,38 @@
   export default {
     name: "BtrzField",
     props: {
-      id: String,
-      name: String,
-      type: String,
-      value: String,
-      label: Boolean
+      label: {
+        type: String
+      }
     },
-    created() {
-      this.checkIfEmpty(this.value);
-      this.$on('childValueUpdated', function(value) {
-        this.checkIfEmpty(value);
+    mounted() {
+      console.log(this)
+      try {
+        this.id = this.$children[0].$options.propsData.id;
+      }
+      catch(err) {
+        this.id = null;
+        console.loh(err)
+      }
+      this.change(this.value);
+      this.$on('change', function(value) {
+        this.change(value);
       })
-      this.$on('childOnFocus', function(){
-        this.childIsOnFocus();
+      this.$on('focus', function(){
+        this.focus();
       });
-      this.$on('childOutOfFocus', function(){
-        this.childIsOutOfFocus();
+      this.$on('blur', function(){
+        this.blur();
       })
     },
     methods: {
-      checkIfEmpty(value) {
+      change(value) {
         this.isEmpty = !Boolean(value);
       },
-      getProps() {
-        return this._props;
-      },
-      childIsOnFocus() {
+      focus() {
         this.focused = true;
       },
-      childIsOutOfFocus() {
+      blur() {
         this.focused = false;
       }
     },

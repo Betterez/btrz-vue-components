@@ -12,13 +12,13 @@
     methods: {
       toggle() {
         this.isChecked = !this.isChecked;
-        this.$parent.$emit('childValueUpdated', this.checked);
+        this.$parent.$emit('change', this.checked);
       },
       onFocus() {
-        this.$parent.$emit('childOnFocus');
+        this.$parent.$emit('focus');
       },
       outOfFocus() {
-        this.$parent.$emit('childOutOfFocus');
+        this.$parent.$emit('blur');
       }
     },
     data() {
