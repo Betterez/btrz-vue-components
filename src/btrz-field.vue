@@ -6,14 +6,29 @@
         'input--empty': isEmpty,
         'input--filled': !isEmpty
       }">
-      <label :for="id">
-        <span v-if="label && label.length > 0">{{label}}:</span>
-        <span v-if="!label">&nbsp;</span>
-      </label>
-    <slot></slot>
-    <div>
-      <div class="error">
-        ERRORS
+    <label :for="id" v-if="label && label.length > 0">{{label}}:</label>
+    <label :for="id" v-if="!label">&nbsp;</label>
+
+    <btrz-input v-if="type === 'text'"
+      v-model="inputData"
+      @input="change(inputData)"
+      @blur="blur()"
+      @focus="focus()"
+      :id="id"
+      :name="name"
+      type="text"
+      :value="value">
+    </btrz-input>
+
+    <btrz-toggle v-if="type === 'toggle'"
+      :checked="checked"
+      :id="id"
+      :name="name">
+    </btrz-toggle>
+
+    <div v-if="errors" class="errors">
+      <div v-for="error in errors" class="error">
+        {{error.message}}
       </div>
     </div>
   </div>
@@ -23,29 +38,27 @@
   export default {
     name: "BtrzField",
     props: {
+      id: {
+        type: String
+      },
+      type: {
+        type: String
+      },
       label: {
         type: String
+      },
+      name: {
+        type: String
+      },
+      value : {
+        type: String
+      },
+      errors: {
+        type: Object
+      },
+      checked: {
+        type: Boolean
       }
-    },
-    mounted() {
-      console.log(this)
-      try {
-        this.id = this.$children[0].$options.propsData.id;
-      }
-      catch(err) {
-        this.id = null;
-        console.loh(err)
-      }
-      this.change(this.value);
-      this.$on('change', function(value) {
-        this.change(value);
-      })
-      this.$on('focus', function(){
-        this.focus();
-      });
-      this.$on('blur', function(){
-        this.blur();
-      })
     },
     methods: {
       change(value) {
@@ -57,6 +70,9 @@
       blur() {
         this.focused = false;
       }
+    },
+    created() {
+      this.change(this.value);
     },
     data() {
       return {

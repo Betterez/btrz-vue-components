@@ -5,11 +5,10 @@ import {insertHTML} from "./utils";
 import BtrzField from "../src/btrz-field";
 import BtrzInput from "../src/btrz-input";
 
-describe("BtrzField", () => {
-  it("Should render a form-group", () => {
+describe.only("BtrzField", () => {
+  it("Should render a form-group.", () => {
     insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="testValue" :label=true>
-                  </btrz-field>
+                  <btrz-field name="testName" type="text" value="testValue"></btrz-field>
                 </div>`);
 
     const app = new Vue({
@@ -20,24 +19,9 @@ describe("BtrzField", () => {
     expect(formGroup.length).to.equal(1);
   });
 
-  it("should render a label if label='true'", () => {
+  it("Should render correct label.", () => {
     insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="testValue" :label=true>
-                  </btrz-field>
-                </div>`);
-
-    const app = new Vue({
-        el: "#app",
-        components: {BtrzField}
-      }),
-    label = $("#app");
-    expect(label.length).to.equal(1);
-  });
-
-  it("should render an empty label if label='false'", () => {
-    insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="testValue" :label=false>
-                  </btrz-field>
+                  <btrz-field name="testName" type="text" value="testValue" label="testLabel"></btrz-field>
                 </div>`);
 
     const app = new Vue({
@@ -45,13 +29,12 @@ describe("BtrzField", () => {
         components: {BtrzField}
       }),
     label = $(".form-group label");
-    expect(label.html()).to.equal('<!----> <span>&nbsp;</span>');
+    expect(label.text()).to.equal("testLabel:");
   });
 
-  it("should render correct name in the label", () => {
+  it("Should render an empty label if label field is empty.", () => {
     insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="testValue" label="true">
-                  </btrz-field>
+                  <btrz-field name="testName" type="testType" value="testValue" label=""></btrz-field>
                 </div>`);
 
     const app = new Vue({
@@ -59,13 +42,12 @@ describe("BtrzField", () => {
         components: {BtrzField}
       }),
     label = $(".form-group label");
-    expect(label.text()).to.equal('testName: ');
+    expect(label.html().trim()).to.equal('&nbsp;');
   });
 
-  it("should render correct for attribute in the label", () => {
+  it("Should render correct for attribute in the label.", () => {
     insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="testValue" label="true">
-                  </btrz-field>
+                  <btrz-field id="123456" name="testName" type="testType" value="testValue" label="true"></btrz-field>
                 </div>`);
 
     const app = new Vue({
@@ -73,16 +55,12 @@ describe("BtrzField", () => {
         components: {BtrzField}
       }),
     label = $(".form-group label");
-    expect(label.attr("for")).to.equal('testName');
+    expect(label.attr("for")).to.equal('123456');
   });
 
-  it("should have class .input--filled if the input is complete inside the field", () => {
+  it("Should have class .input--filled if the input is contains text.", () => {
     insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="testValue" label="true">
-                    <template scope="props">
-                      <btrz-input :name="props.props.name" :type="props.props.type" :value="props.props.value"></btrz-input>
-                    </template>
-                  </btrz-field>
+                  <btrz-field name="testName" type="testType" value="testValue" label="true"></btrz-field>
                 </div>`);
 
     const app = new Vue({
@@ -93,13 +71,9 @@ describe("BtrzField", () => {
     expect(formGroup.hasClass('input--filled')).to.equal(true);
   });
 
-  it("should have class .input--empty if the input is empty inside the field", () => {
+  it("Should have class .input--empty if the input is empty.", () => {
     insertHTML(`<div id="app">
-                  <btrz-field name="testName" type="testType" value="" label="true">
-                    <template scope="props">
-                      <btrz-input :name="props.props.name" :type="props.props.type" :value="props.props.value"></btrz-input>
-                    </template>
-                  </btrz-field>
+                  <btrz-field name="testName" type="text" value="" label="label text"></btrz-field>
                 </div>`);
 
     const app = new Vue({
@@ -108,5 +82,31 @@ describe("BtrzField", () => {
       }),
     formGroup = $(".form-group");
     expect(formGroup.hasClass('input--empty')).to.equal(true);
+  });
+
+  it("Should display errors if there's any.", () => {
+    insertHTML(`<div id="app">
+                  <btrz-field name="testName" type="text" value="" label="label text" :errors="[{'type': 0, 'message': 'Error message goes here'}]"></btrz-field>
+                </div>`);
+
+    const app = new Vue({
+        el: "#app",
+        components: {BtrzField, BtrzInput}
+      }),
+    errors = $(".form-group .errors");
+    expect(errors.length).to.not.equal(0);
+  });
+
+  it("should not display any errors if there's none.", () => {
+    insertHTML(`<div id="app">
+                  <btrz-field name="testName" type="text" value="" label="label text" :errors="[{'type': 0, 'message': 'Error message goes here'}]"></btrz-field>
+                </div>`);
+
+    const app = new Vue({
+        el: "#app",
+        components: {BtrzField, BtrzInput}
+      }),
+    errors = $(".form-group .errors");
+    expect(errors.length).to.equal(1);
   });
 });
