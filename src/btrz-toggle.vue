@@ -1,28 +1,32 @@
 <template>
     <span class="btrz-switcher" @click="toggle">
-      <input type="checkbox" :checked=this.isChecked>
+      <input :checked=isChecked type="checkbox">
       <label></label>
     </span>
 </template>
 
 <script>
   export default {
-    name: "BtrzInput",
-    props: ["checked"],
+    name: "BtrzToggle",
+    props: ["id", "type", "label", "name", "value", "errors", "checked"],
+    computed: {
+      isChecked: function () {
+        if(this.value === "true") {
+          this.value = true;
+        }
+        if(this.value === "false") {
+          this.value = false;
+        }
+        return Boolean(this.value)
+      }
+    },
     methods: {
       toggle() {
-        this.isChecked = !this.isChecked;
-        this.$parent.$emit('change', this.checked);
-      },
-      onFocus() {
-        this.$parent.$emit('focus');
-      },
-      outOfFocus() {
-        this.$parent.$emit('blur');
+        this.value = !this.value;
       }
     },
     data() {
-      return {isChecked: this.checked}
+      return {value: this.value}
     }
   }
 </script>
