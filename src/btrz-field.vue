@@ -9,22 +9,8 @@
     <label :for="id" v-if="label && label.length > 0">{{label}}:</label>
     <label :for="id" v-if="!label">&nbsp;</label>
 
-    <btrz-input v-if="type === 'text'"
-      v-model="inputData"
-      @input="change(inputData)"
-      @blur="blur()"
-      @focus="focus()"
-      :id="id"
-      :name="name"
-      type="text"
-      :value="value">
-    </btrz-input>
-
-    <btrz-toggle v-if="type === 'toggle'"
-      :checked="checked"
-      :id="id"
-      :name="name">
-    </btrz-toggle>
+    <component v-bind:is="content" :name="name" :type="type" :value="value" :id="id" @input="change(this.value)" @blur="blur()" @focus="focus()">
+    </component>
 
     <div v-if="errors" class="errors">
       <div v-for="error in errors" class="error">
@@ -35,8 +21,15 @@
 </template>
 
 <script>
+import BtrzInput from "../src/btrz-input";
+import BtrzToggle from "../src/btrz-toggle";
+
   export default {
     name: "BtrzField",
+    components: {
+      BtrzInput,
+      BtrzToggle
+    },
     props: {
       id: {
         type: String
@@ -58,6 +51,9 @@
       },
       checked: {
         type: Boolean
+      },
+      content: {
+        type: String
       }
     },
     methods: {
