@@ -5,7 +5,7 @@ import {insertHTML} from "./utils";
 import BtrzField from "../src/btrz-field";
 import BtrzInput from "../src/btrz-input";
 
-describe.only("BtrzField", () => {
+describe("BtrzField", () => {
   it("Should render a form-group.", () => {
     insertHTML(`<div id="app">
                   <btrz-field name="testName" type="text" value="testValue"></btrz-field>
