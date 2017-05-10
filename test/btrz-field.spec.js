@@ -3,7 +3,6 @@ import "./setup";
 import {expect} from "chai";
 import {insertHTML} from "./utils";
 import BtrzField from "../src/btrz-field";
-import BtrzInput from "../src/btrz-input";
 
 describe("BtrzField", () => {
   it("Should render a form-group.", () => {
