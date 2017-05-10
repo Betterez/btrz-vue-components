@@ -5,7 +5,7 @@ import {insertHTML} from "./utils";
 import BtrzField from "../src/btrz-field";
 import BtrzInput from "../src/btrz-input";
 
-describe("BtrzField", () => {
+describe.only("BtrzField", () => {
   it("Should render a form-group.", () => {
     insertHTML(`<div id="app">
                   <btrz-field name="testName" type="text" value="testValue"></btrz-field>
@@ -65,7 +65,7 @@ describe("BtrzField", () => {
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzField, BtrzInput}
+        components: {BtrzField}
       }),
     formGroup = $(".form-group");
     expect(formGroup.hasClass('input--filled')).to.equal(true);
@@ -78,7 +78,7 @@ describe("BtrzField", () => {
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzField, BtrzInput}
+        components: {BtrzField}
       }),
     formGroup = $(".form-group");
     expect(formGroup.hasClass('input--empty')).to.equal(true);
@@ -91,7 +91,7 @@ describe("BtrzField", () => {
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzField, BtrzInput}
+        components: {BtrzField}
       }),
     errors = $(".form-group .errors");
     expect(errors.length).to.not.equal(0);
@@ -104,9 +104,35 @@ describe("BtrzField", () => {
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzField, BtrzInput}
+        components: {BtrzField}
       }),
     errors = $(".form-group .errors");
     expect(errors.length).to.equal(1);
+  });
+
+  it("Should render btrz-toggle specified in content attribute.", () => {
+    insertHTML(`<div id="app">
+                  <btrz-field name="testName" type="text" content="BtrzToggle" value="" label="label text" :errors="[{'type': 0, 'message': 'Error message goes here'}]"></btrz-field>
+                </div>`);
+
+    const app = new Vue({
+        el: "#app",
+        components: {BtrzField}
+      }),
+    toggle = $(".form-group .btrz-switcher");
+    expect(toggle.length).to.equal(1);
+  });
+
+  it("Should render btrz-input specified in content attribute.", () => {
+    insertHTML(`<div id="app">
+                  <btrz-field name="testName" type="text" content="BtrzInput" value="" label="label text" :errors="[{'type': 0, 'message': 'Error message goes here'}]"></btrz-field>
+                </div>`);
+
+    const app = new Vue({
+        el: "#app",
+        components: {BtrzField}
+      }),
+    btrzInput = $(".form-group input");
+    expect(btrzInput.length).to.equal(1);
   });
 });
