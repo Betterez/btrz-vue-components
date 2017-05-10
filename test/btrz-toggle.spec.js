@@ -7,7 +7,7 @@ import BtrzToggle from "../src/btrz-toggle";
 describe("BtrzToggle", () => {
   it("Toggle should be ON if checked is true", () => {
     insertHTML(`<div id="app">
-                  <btrz-toggle :checked=true></btrz-toggle>
+                  <btrz-toggle value="true"></btrz-toggle>
                 </div>`);
 
     const app = new Vue({
@@ -20,7 +20,7 @@ describe("BtrzToggle", () => {
 
   it("Toggle should be OFF if checked is false", () => {
     insertHTML(`<div id="app">
-                  <btrz-toggle :checked=false></btrz-toggle>
+                  <btrz-toggle value="false"></btrz-toggle>
                 </div>`);
 
     const app = new Vue({
