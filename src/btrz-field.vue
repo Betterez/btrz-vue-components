@@ -9,7 +9,7 @@
     <label :for="id" v-if="label && label.length > 0">{{label}}:</label>
     <label :for="id" v-if="!label">&nbsp;</label>
 
-    <component v-bind:is="content" :name="name" :type="type" :value="value" :id="id" @input="change(this.value)" @blur="blur()" @focus="focus()">
+    <component v-bind:is="content" v-bind="$props" @input="change(this.value)" @blur="blur()" @focus="focus()">
     </component>
 
     <div v-if="errors" class="errors">
