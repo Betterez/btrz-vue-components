@@ -3,7 +3,6 @@
   <select ref="select"
           @change="propagateChange($event.target.value)"
           v-model="selected"
-          class="form-control col-xs-2 chevron-down-bkg"
           :disabled="disabled">
     <option value="" v-if="firstOption" :value="firstOption.value">{{firstOption.text}}</option>
     <option v-for="option in options" :value="option.value">
