@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <btrz-label :id="id" :label="label"></btrz-label>
     <input class="form-control calendar-bkg"
     ref="input"
