@@ -1,12 +1,18 @@
 <template>
-  <input class="form-control calendar-bkg"
-         ref="input"
-         :id="id"
-         :disabled="disabled"/>
+  <div class="">
+    <btrz-label :id="id" :label="label"></btrz-label>
+    <input class="form-control calendar-bkg"
+    ref="input"
+    :id="id"
+    :disabled="disabled"/>
+    <btrz-errors :errors="errors"></btrz-errors>
+  </div>
 </template>
 
 <script>
   import moment from "moment";
+  import BtrzLabel from "../../btrz-vue-components/src/btrz-label";
+  import BtrzErrors from "../../btrz-vue-components/src/btrz-errors";
 
   const pickadateI18nStrings = {
     en: {
@@ -43,6 +49,10 @@
 
   export default {
     name: "BtrzDateInput",
+    components: {
+      BtrzLabel,
+      BtrzErrors
+    },
     dependencies: ["logger"],
     props: {
       id: {type: String},
@@ -54,7 +64,9 @@
       submitFormat: {type: String, "default": "YYYY-MM-DD"}, // Momentjs format
       minDate: {"default": false},
       lang: {type: String, required: true},
-      disabled: {type: Boolean, "default": false}
+      disabled: {type: Boolean, "default": false},
+      errors: {type: Object},
+      label: {type: String}
     },
     model: {
       prop: "value",
