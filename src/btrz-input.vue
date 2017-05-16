@@ -9,7 +9,7 @@
     :id="id"
     :name="name"
     :type="type"
-    :value="value"
+    :value="inputValue"
     :placeholder="placeholder"
     :label="label"
     @input="valueUpdated($event.target.value);"
@@ -20,12 +20,18 @@
 </template>
 
 <script>
+  import BtrzLabel from "../../btrz-vue-components/src/btrz-label";
+  import BtrzErrors from "../../btrz-vue-components/src/btrz-errors";
   export default {
     name: "BtrzInput",
+    components:{
+      BtrzLabel,
+      BtrzErrors
+    },
     props: ["placeholder", "type", "name", "value", "id", "label", "errors"],
     methods: {
       valueUpdated(value) {
-        this.value = value;
+        this.inputValue = value;
         this.isEmpty = !Boolean(value);
         this.$emit('input', value);
       },
@@ -38,7 +44,7 @@
       this.valueUpdated(this.value);
     },
     data() {
-      return {isEmpty: true, focused: false};
+      return {isEmpty: true, focused: false, inputValue: this.value};
     }
   }
 </script>
