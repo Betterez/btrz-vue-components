@@ -30,9 +30,12 @@
     },
     props: ["placeholder", "type", "name", "value", "id", "label", "errors"],
     methods: {
-      valueUpdated(value) {
+      _updateValue(value) {
         this.inputValue = value;
         this.isEmpty = !Boolean(value);
+      },
+      valueUpdated(value) {
+        this._updateValue(value);
         this.$emit('input', value);
       },
       focusUpdated(focus, value) {
@@ -41,7 +44,7 @@
       }
     },
     mounted() {
-      this.valueUpdated(this.value);
+      this._updateValue(this.value);
     },
     data() {
       return {isEmpty: true, focused: false, inputValue: this.value};
