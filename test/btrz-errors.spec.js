@@ -5,7 +5,7 @@ import {insertHTML} from "./utils";
 import BtrzInput from "../src/btrz-input";
 import BtrzToggle from "../src/btrz-toggle";
 
-describe.only("BtrzLabel", () => {
+describe("BtrzErrors", () => {
   it("btrz-input should render errors if a error object is given as parameter.", () => {
     insertHTML(`<div id="app">
                   <btrz-input type='text' class="form-control" :errors="[{'type': 0, 'message': 'Error message goes here'}, {'type': 0, 'message': 'Error message goes here'}]"></btrz-input>

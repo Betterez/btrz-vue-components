@@ -1,6 +1,9 @@
 # btrz-vue-components
 A collection of Vue components used in the Betterez UI
 
+### Before we start
+Remember that Node v6.9.5 is needed.
+
 ### How we work: reusable, generic components
 
 Keep in mind that we are aiming to create a collection of **reusable, generic components**.
