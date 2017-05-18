@@ -1,10 +1,17 @@
 <template>
-  <div>
+  <div :class="{
+      'input--focused': focused,
+      'input--empty': isEmpty,
+      'input--filled': !isEmpty
+    }">
     <btrz-label :id="id" :label="label"></btrz-label>
     <input class="form-control calendar-bkg"
     ref="input"
     :id="id"
-    :disabled="disabled"/>
+    :disabled="disabled"
+    @input="valueUpdated($event.target.value);"
+    @blur="focusUpdated('blur', $event.target.value);"
+    @focus="focusUpdated('focus', $event.target.value);"/>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
@@ -112,11 +119,14 @@
         }
       },
       onSet(context) {
+
         if ("select" in context) {
           const date = this.formatDate(context.select);
           this.$emit("change", date);
+          this.isEmpty = !Boolean(date);
         } else if ("clear" in context) {
           this.$emit("change", null);
+          this.isEmpty = !Boolean(null);
         }
       },
       getTranslation(lang) {
@@ -161,7 +171,16 @@
           date = moment(newDate).toDate();
         }
         this.picker.set("select", date, {muted: true});
+      },
+      valueUpdated(value) {
+        this.inputValue = value;
+      },
+      focusUpdated(focus, value) {
+        this.focused = !this.focused;
       }
+    },
+    data() {
+      return {isEmpty: true, focused: false, inputValue: this.value};
     }
   };
 
