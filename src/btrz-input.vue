@@ -2,7 +2,8 @@
   <div :class="{
       'input--focused': focused,
       'input--empty': isEmpty,
-      'input--filled': !isEmpty
+      'input--filled': !isEmpty,
+      'bz-has-error': errors
     }">
     <btrz-label :id="id" :label="label"></btrz-label>
     <div class="input-group">
