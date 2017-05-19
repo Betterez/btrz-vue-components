@@ -124,9 +124,11 @@
           const date = this.formatDate(context.select);
           this.$emit("change", date);
           this.isEmpty = !Boolean(date);
+          this.value = date;
         } else if ("clear" in context) {
           this.$emit("change", null);
           this.isEmpty = !Boolean(null);
+          this.value = null;
         }
       },
       getTranslation(lang) {
