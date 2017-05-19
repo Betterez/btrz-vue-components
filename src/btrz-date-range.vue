@@ -38,11 +38,6 @@
       prop: "value",
       event: "change"
     },
-    mounted() {
-      console.log(this.$refs.startDate);
-      console.log(this.$refs.endDate);
-    },
-
     methods: {
       startDateUpdated() {
         this.endDateMinValue = this.startModel;
