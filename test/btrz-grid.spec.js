@@ -33,6 +33,7 @@ describe("BtrzGrid", () => {
   it("should render last item if provided", () => {
     insertHTML(`<div id="app">
                   <btrz-grid :items="things">
+                    <a slot="first">first</a>
                     <template scope="props">
                       <child-component :thing="props.item"></child-component>
                     </template>
@@ -47,13 +48,14 @@ describe("BtrzGrid", () => {
       app = new Vue({
         el: "#app",
         components: {BtrzGrid, ChildComponent},
-        data: {things: [{name: "first"}, {name: "second"}]}
+        data: {things: [{name: "2"}, {name: "3"}]}
       }),
       renderedChildren = $("#app div div a");
-    expect(renderedChildren).to.have.length(3);
+    expect(renderedChildren).to.have.length(4);
     expect(renderedChildren.get(0).text).to.equal("first");
-    expect(renderedChildren.get(1).text).to.equal("second");
-    expect(renderedChildren.get(2).text).to.equal("last");
+    expect(renderedChildren.get(1).text).to.equal("2");
+    expect(renderedChildren.get(2).text).to.equal("3");
+    expect(renderedChildren.get(3).text).to.equal("last");
   });
 
   it("should default to 2 per line (50%) if items' length is 2", () => {

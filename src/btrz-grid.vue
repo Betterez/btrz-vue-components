@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="this.$slots.first" :class="itemClass ? itemClass : 'col-xs-12 col-sm-6 ' + colSpan">
+      <slot name="first"></slot>
+    </div>
     <div v-for="(item, index) in items" :class="itemClass ? itemClass : 'col-xs-12 col-sm-6 ' + colSpan">
       <slot :item="item" :index="index"></slot>
     </div>
