@@ -1,4 +1,3 @@
-
 <template>
   <select ref="select"
           @change="propagateChange($event.target.value)"
@@ -48,6 +47,9 @@
     methods: {
       // Just using for testing
       hasTextAndValue,
+      focus() {
+        this.$refs.select.focus();
+      },
       propagateChange(newValue) {
         this.$emit("change", newValue);
       }
