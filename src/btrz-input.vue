@@ -9,6 +9,7 @@
     <div class="input-group">
       <span v-if="prefix" class="input-group-addon">{{prefix}}</span>
       <input class="form-control"
+      ref="input"
       :id="id"
       :name="name"
       :type="type"
@@ -51,6 +52,9 @@
       focusUpdated(focus, value) {
         this.$emit(focus, value);
         this.focused = !this.focused;
+      },
+      focus() {
+        this.$refs.input.focus();
       }
     },
     mounted() {
