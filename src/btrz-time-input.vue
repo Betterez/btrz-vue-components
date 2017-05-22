@@ -11,6 +11,7 @@
     :type="type"
     :value="inputValue"
     :placeholder="placeholder"
+    :disabled="disabled"
     :label="label"
     @input="valueUpdated($event.target.value);"
     @blur="focusUpdated('blur', $event.target.value);"
@@ -28,7 +29,16 @@
       BtrzLabel,
       BtrzErrors
     },
-    props: ["placeholder", "type", "name", "value", "id", "label", "errors"],
+    props: {
+      placeholder: {type: String},
+      type: {type: String},
+      name: {type: String},
+      value: {type: String},
+      id: {type: String},
+      label: {type: String},
+      errors: {type: Object},
+      disabled: {type: Boolean, "default": false}
+    },
     methods: {
       valueUpdated(value) {
         this.inputValue = value;
