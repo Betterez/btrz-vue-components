@@ -3,7 +3,7 @@
       'input--focused': focused,
       'input--empty': isEmpty,
       'input--filled': !isEmpty,
-      'bz-has-error': errors
+      'bz-has-error': hasError
     }">
     <btrz-label :id="id" :label="label"></btrz-label>
     <div class="input-group">
@@ -34,6 +34,11 @@
       BtrzErrors
     },
     props: ["placeholder", "type", "name", "value", "id", "label", "errors", "prefix", "postfix"],
+    computed: {
+      hasError: {
+        get() { return this.errors && this.errors.length > 0 }
+      }
+    },
     methods: {
       _updateValue(value) {
         this.inputValue = value;
