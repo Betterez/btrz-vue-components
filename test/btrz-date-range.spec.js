@@ -13,7 +13,7 @@ const dummyLogger = {
 };
 
 
-describe("BtrzDateRange", () => {
+describe.only("BtrzDateRange", () => {
   it("Should render two btrz-date-input.", () => {
     insertHTML(`<div id="app">
                   <btrz-date-range
@@ -57,7 +57,7 @@ describe("BtrzDateRange", () => {
     expect(label.text().indexOf('End Date')).to.not.equal(-1);
   });
 
-  it("End date picker Should initialize disabled", () => {
+  it("End date and end time Should initialize disabled", () => {
     let wrapper = null;
     const EXPECTED_DATE = new Date();
     let props = {
@@ -66,6 +66,7 @@ describe("BtrzDateRange", () => {
       startDateLabel: 'testStartDateLabel',
       endDateName: 'testEndDateName',
       endDateLabel: 'testEndDateLabel',
+      displayTime: true,
       lang: 'en'
     };
     wrapper = mount(BtrzDateRange, {
@@ -73,9 +74,10 @@ describe("BtrzDateRange", () => {
       propsData: props
     });
     expect(wrapper.vm.$refs.endDate.disabled).to.equal(true);
+    expect(wrapper.vm.$refs.endTime.disabled).to.equal(true);
   });
 
-  it("End date picker should get enabled if start date is selected.", () => {
+  it("End date and end time should get enabled if start date is selected.", () => {
     let wrapper = null;
     const EXPECTED_DATE = new Date();
     let props = {
