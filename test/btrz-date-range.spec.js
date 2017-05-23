@@ -13,7 +13,7 @@ const dummyLogger = {
 };
 
 
-describe.only("BtrzDateRange", () => {
+describe("BtrzDateRange", () => {
   it("Should render two btrz-date-input.", () => {
     insertHTML(`<div id="app">
                   <btrz-date-range
