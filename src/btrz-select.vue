@@ -1,5 +1,6 @@
 <template>
   <select ref="select"
+          class="chevron-down-bkg"
           @change="propagateChange($event.target.value)"
           v-model="selected"
           :disabled="disabled">
@@ -22,7 +23,6 @@
     name: "BtrzSelect",
     props: {
       selectedValue: {
-        type: String,
         "default": ""
       },
       options: {
