@@ -9,7 +9,7 @@
     <div class="col-xs-6">
       <btrz-date-input class="form-group" ref="endDate" v-model="endModel" :disabled="endDateDisabled" :minDate="endDateMinValue" :id="id + '_' + startDateName" :name="endDateName" :label="endDateLabel" :lang="lang" :submitFormat="submitFormat"></btrz-date-input>
     </div>
-    <div class="col-xs-3" v-if="displayTime">
+    <div class="col-xs-6" v-if="displayTime">
       <btrz-time-input class="form-group" ref="endTime" :name="endTimeName" :disabled="endDateDisabled" :label="endTimeLabel"></btrz-time-input>
     </div>
   </div>
@@ -40,7 +40,6 @@
       // value: Supports setting Date, [YEAR, MONTH, DAY], timestamp (int) or string matching submitFormat
       displayFormat: {type: String, "default": "dd mmmm, yyyy"}, // Pickadate format
       submitFormat: {type: String, "default": "YYYY-MM-DD"}, // Momentjs format
-      minDate: {"default": false},
       lang: {type: String, required: true},
       errors: {type: Object},
       label: {type: String},
