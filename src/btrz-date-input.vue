@@ -94,9 +94,9 @@
       }
     },
     mounted() {
-      require("imports-loader?define=>false!../node_modules/pickadate/lib/picker.date");
-      require("../node_modules/pickadate/lib/themes/default.css");
-      require("../node_modules/pickadate/lib/themes/default.date.css");
+      require("imports-loader?define=>false!pickadate/lib/picker.date");
+      require("pickadate/lib/themes/default.css");
+      require("pickadate/lib/themes/default.date.css");
 
       const baseConfig = {
         onSet: this.onSet,
