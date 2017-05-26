@@ -1,0 +1,67 @@
+<template>
+  <div :class="{
+      'input--focused': focused,
+      'input--empty': isEmpty,
+      'input--filled': !isEmpty,
+      'bz-has-error': hasError
+    }">
+    <btrz-label :id="id" :label="label"></btrz-label>
+    <select multiple :disabled="!selectEnabled" class="form-control" rows="4" :id="id"
+    @input="valueUpdated($event.target.value);"
+    @blur="focusUpdated('blur', $event.target.value);"
+    @focus="focusUpdated('focus', $event.target.value);">
+      <option v-for="option in options" :value="option.key" :selected="option.selected">{{option.value}}</option>
+    </select>
+    <btrz-errors :errors="errors"></btrz-errors>
+  </div>
+</template>
+
+<script>
+  import BtrzLabel from "../../btrz-vue-components/src/btrz-label";
+  import BtrzErrors from "../../btrz-vue-components/src/btrz-errors";
+  export default {
+    name: "BtrzMultiSelect",
+    components:{
+      BtrzLabel,
+      BtrzErrors
+    },
+    props: ["id", "label", "errors", "options"],
+    computed: {
+      selectEnabled: {
+        get() {
+          if (this.options && this.options.length > 0) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+      hasError: {
+        get() { return this.errors && this.errors.length > 0 }
+      }
+    },
+    methods: {
+      _updateValue(value) {
+        this.inputValue = value;
+        this.isEmpty = !Boolean(value);
+      },
+      valueUpdated(value) {
+        this._updateValue(value);
+        this.$emit('input', value);
+      },
+      focusUpdated(focus, value) {
+        this.$emit(focus, value);
+        this.focused = !this.focused;
+      },
+      focus() {
+        this.$refs.input.focus();
+      }
+    },
+    mounted() {
+      this._updateValue(this.value);
+    },
+    data() {
+      return {isEmpty: true, focused: false, inputValue: this.value};
+    }
+  }
+</script>
