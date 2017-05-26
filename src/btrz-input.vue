@@ -36,15 +36,15 @@
       BtrzErrors
     },
     props: {
-      placeholder: {type: "text"},
-      type: {type: "text"},
-      name: {type: "text"},
-      value: {},
-      id: {type: "text"},
-      label: {type: "text"},
-      errors: {type: Object},
-      prefix: {type: "text"},
-      postfix: {type: "text"},
+      placeholder: {type: String},
+      type: {type: String},
+      name: {type: String},
+      value: {type: String},
+      id: {type: String},
+      label: {type: String},
+      errors: {type: String},
+      prefix: {type: String},
+      postfix: {type: String},
       disabled: {type: Boolean}
     },
     computed: {
