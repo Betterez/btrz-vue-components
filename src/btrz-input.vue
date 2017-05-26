@@ -11,6 +11,7 @@
       <input class="form-control"
       ref="input"
       :id="id"
+      :disabled="disabled"
       :name="name"
       :type="type"
       :value="inputValue"
@@ -34,7 +35,18 @@
       BtrzLabel,
       BtrzErrors
     },
-    props: ["placeholder", "type", "name", "value", "id", "label", "errors", "prefix", "postfix"],
+    props: {
+      placeholder: {type: "text"},
+      type: {type: "text"},
+      name: {type: "text"},
+      value: {},
+      id: {type: "text"},
+      label: {type: "text"},
+      errors: {type: Object},
+      prefix: {type: "text"},
+      postfix: {type: "text"},
+      disabled: {type: Boolean}
+    },
     computed: {
       hasError: {
         get() { return this.errors && this.errors.length > 0 }
