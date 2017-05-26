@@ -1,7 +1,7 @@
 <template>
-  <ul class="flex-item hidden-xs hidden-sm nav wizard-nav navbar-nav">
+  <ul v-if="activeStep >= 0" class="flex-item hidden-xs hidden-sm nav wizard-nav navbar-nav">
     <template v-for="(item, index) of routes">
-      <li :class="[item.active ? 'active' : '', index > activeStep ? 'disabled' : 'completed']">
+      <li v-if="!item.hide" :class="[item.active ? 'active' : '', index > activeStep ? 'disabled' : 'completed']">
           <a v-if="index < activeStep" :href="item.path"><small>{{$t(item.title)}}</small></a>
           <a v-if="!(index < activeStep)"><small>{{$t(item.title)}}</small></a>
       </li>
@@ -15,7 +15,9 @@ export default {
   props: ["routes"],
   computed: {
     activeStep() {
-      return this.routes.find(r => r.active).step;
+      const activeRoute = this.routes.find(r => r.active);
+      if (!activeRoute) return;
+      return activeRoute.step;
     }
   }
 };
