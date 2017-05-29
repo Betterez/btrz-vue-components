@@ -52,6 +52,11 @@
         get() { return this.errors && this.errors.length > 0 }
       }
     },
+    watch: {
+      value(newValue) {
+        this._updateValue(newValue);
+      }
+    },
     methods: {
       _updateValue(value) {
         this.inputValue = value;
