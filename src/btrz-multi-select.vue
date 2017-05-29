@@ -56,6 +56,7 @@
           }
         });
         this.selectedOptions = options;
+        this.optionsData = newValue;
         this._updateValue(options);
       }
     },
