@@ -7,10 +7,11 @@
     }">
     <btrz-label :id="id" :label="label"></btrz-label>
     <select multiple :disabled="!selectEnabled" class="form-control" rows="4" :id="id"
-    @input="valueUpdated($event.target.value);"
-    @blur="focusUpdated('blur', $event.target.value);"
-    @focus="focusUpdated('focus', $event.target.value);">
-      <option v-for="option in options" :value="option.key" :selected="option.selected">{{option.value}}</option>
+      v-model="selectedOptions"
+      @input="valueUpdated($event.target.value);"
+      @blur="focusUpdated('blur', $event.target.value);"
+      @focus="focusUpdated('focus', $event.target.value);">
+      <option v-for="option in optionsData" :value="option.key" :selected="option.selected">{{option.value}}</option>
     </select>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
@@ -41,12 +42,7 @@
       }
     },
     methods: {
-      _updateValue(value) {
-        this.inputValue = value;
-        this.isEmpty = !Boolean(value);
-      },
       valueUpdated(value) {
-        this._updateValue(value);
         this.$emit('input', value);
       },
       focusUpdated(focus, value) {
@@ -58,10 +54,16 @@
       }
     },
     mounted() {
-      this._updateValue(this.value);
+      var options = [];
+      this.optionsData.forEach(function(option){
+        if(option.selected == true) {
+          options.push(option.key);
+        }
+      });
+      this.selectedOptions = options;
     },
     data() {
-      return {isEmpty: true, focused: false, inputValue: this.value};
+      return {isEmpty: true, focused: false, inputValue: this.value, optionsData: this.options, selectedOptions: ''};
     }
   }
 </script>
