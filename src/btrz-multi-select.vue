@@ -26,7 +26,13 @@
       BtrzLabel,
       BtrzErrors
     },
-    props: ["id", "label", "errors", "options"],
+    props: {
+      id: { type: String },
+      label: { type: String },
+      errors: { type: Object },
+      options: { type: Object },
+      value: { type: Object }
+    },
     computed: {
       selectEnabled: {
         get() {
@@ -41,8 +47,24 @@
         get() { return this.errors && this.errors.length > 0 }
       }
     },
+    watch: {
+      options(newValue) {
+        var options = [];
+        newValue.forEach(function(option){
+          if(option.selected == true) {
+            options.push(option.key);
+          }
+        });
+        this.selectedOptions = options;
+      }
+    },
     methods: {
+      _updateValue(value) {
+        this.inputValue = this.selectedOptions;
+        this.isEmpty = !Boolean(value);
+      },
       valueUpdated(value) {
+        this._updateValue(value);
         this.$emit('input', value);
       },
       focusUpdated(focus, value) {
