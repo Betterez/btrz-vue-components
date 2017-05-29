@@ -56,6 +56,7 @@
           }
         });
         this.selectedOptions = options;
+        this._updateValue(options);
       }
     },
     methods: {
@@ -74,15 +75,6 @@
       focus() {
         this.$refs.input.focus();
       }
-    },
-    mounted() {
-      var options = [];
-      this.optionsData.forEach(function(option){
-        if(option.selected == true) {
-          options.push(option.key);
-        }
-      });
-      this.selectedOptions = options;
     },
     data() {
       return {isEmpty: true, focused: false, inputValue: this.value, optionsData: this.options, selectedOptions: ''};
