@@ -1,11 +1,6 @@
 <template>
-  <modal :ok-text="$t('close')" :value="opened" effect="fade" @ok="closeModal" @cancel="closeModal">
-    <div slot="modal-header" class="modal-header text-center">
-      {{ message }}
-    </div>
-    <template slot="modal-body">
-    </template>
-    <div slot="modal-footer" class="modal-footer">
+  <modal class="btrz-alert" :value="opened" :title="message" @input="$emit('change', false)">
+    <div slot="footer">
       <div class="col-xs-6 col-xs-offset-3">
         <a class="btn btn-lg btn-default btn-block" @click="closeModal">{{ $t("Close") }}</a>
       </div>
@@ -14,7 +9,7 @@
 </template>
 
 <script>
-  import Modal from "vue-strap/src/Modal";
+  import {Modal} from "uiv";
 
   export default {
     name: "BtrzAlert",
@@ -27,13 +22,25 @@
     },
     props: {
       message: {type: String, required: true},
-      opened: {type: Boolean, default: false}
+      opened: {required: true, type: Boolean, default: false}
     },
     methods: {
       closeModal() {
         this.$emit("change", false);
-        this.opened = false;
       }
     }
   };
 </script>
+
+
+<style>
+  .btrz-alert .modal-body {
+    display: none;
+  }
+
+  .btrz-alert .modal-title {
+    text-align: center;
+    text-shadow: none;
+    font-size: 20px;
+  }
+</style>
