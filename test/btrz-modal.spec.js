@@ -7,7 +7,7 @@ import BtrzModal from "../src/btrz-modal";
 const propsData = {};
 const options = {propsData};
 
-describe.only("BtrzModal", () => {
+describe("BtrzModal", () => {
   const V_MODEL_EVENT = "input";
 
   it("should render the modal elements", () => {
