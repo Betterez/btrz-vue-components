@@ -14,7 +14,7 @@
       :disabled="disabled"
       :name="name"
       :type="type"
-      :value="inputValue"
+      :value="value"
       :placeholder="placeholder"
       :label="label"
       @input="valueUpdated($event.target.value);"
@@ -50,20 +50,15 @@
     computed: {
       hasError: {
         get() { return this.errors && this.errors.length > 0 }
-      }
-    },
-    watch: {
-      value(newValue) {
-        this._updateValue(newValue);
+      },
+      isEmpty: {
+        get() {
+          return !Boolean(this.value);
+        }
       }
     },
     methods: {
-      _updateValue(value) {
-        this.inputValue = value;
-        this.isEmpty = !Boolean(value);
-      },
       valueUpdated(value) {
-        this._updateValue(value);
         this.$emit('input', value);
       },
       focusUpdated(focus, value) {
@@ -74,11 +69,8 @@
         this.$refs.input.focus();
       }
     },
-    mounted() {
-      this._updateValue(this.value);
-    },
     data() {
-      return {isEmpty: true, focused: false, inputValue: this.value};
+      return {focused: false};
     }
   }
 </script>

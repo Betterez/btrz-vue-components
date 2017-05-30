@@ -35,12 +35,12 @@ describe("BtrzInput", () => {
     expect(input.attr("type")).to.equal("text");
   });
 
-  it("should disable the input when specified", () => {
+  it("should disable the input when specified true", () => {
     const wrapper = mount(BtrzInput, {propsData: {disabled: true}});
     expect(wrapper.vm.$refs.input.disabled).to.equal(true);
   });
 
-  it("should NOT disable the input when NOT specified", () => {
+  it("should NOT disable the input when specified false", () => {
     const wrapper = mount(BtrzInput, {propsData: {disabled: false}});
     expect(wrapper.vm.$refs.input.disabled).to.equal(false);
   });
@@ -49,4 +49,6 @@ describe("BtrzInput", () => {
     const wrapper = mount(BtrzInput);
     expect(wrapper.vm.$refs.input.disabled).to.equal(false);
   });
+
+  //Missing test for updating model via v-model
 });
