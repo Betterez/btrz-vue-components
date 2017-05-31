@@ -10,6 +10,7 @@ describe("BtrzMultiSelect", () => {
                   <btrz-multi-select
                   id="id"
                   label="label"
+                  v-model="data"
                   :options="[{'key': 0, 'value': 'option1', selected: false}, {'key': 2, 'value': 'option2', selected: true}, {'key': 3, 'value': 'option3', selected: false}]"
                   errors="">
                   </btrz-multi-select>
@@ -17,7 +18,8 @@ describe("BtrzMultiSelect", () => {
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzMultiSelect}
+        components: {BtrzMultiSelect},
+        data: {data: []}
       }),
       select = $("select");
     expect(select.attr("multiple")).to.equal("multiple");
@@ -28,14 +30,16 @@ describe("BtrzMultiSelect", () => {
                   <btrz-multi-select
                   id="id"
                   label="label"
-                  :options="[{'key': 0, 'value': 'option1', selected: false}, {'key': 2, 'value': 'option2', selected: true}, {'key': 3, 'value': 'option3', selected: false}]"
+                  v-model="data"
+                  :options="[{'key': 0, 'value': 'option1'}, {'key': 1, 'value': 'option2'}, {'key': 2, 'value': 'option3'}]"
                   errors="">
                   </btrz-multi-select>
                 </div>`);
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzMultiSelect}
+        components: {BtrzMultiSelect},
+        data: {data: []}
       }),
       options = $("select option");
     expect(options.length).to.equal(3);
@@ -46,35 +50,20 @@ describe("BtrzMultiSelect", () => {
                   <btrz-multi-select
                   id="id"
                   label="label"
-                  :options="[{'key': 0, 'value': 'option1', selected: true}, {'key': 2, 'value': 'option2', selected: false}, {'key': 3, 'value': 'option3', selected: true}]"
+                  v-model="data"
+                  :options="[{'key': 0, 'value': 'option1'}, {'key': 1, 'value': 'option2'}, {'key': 2, 'value': 'option3'}]"
                   errors="">
                   </btrz-multi-select>
                 </div>`);
 
     const app = new Vue({
         el: "#app",
-        components: {BtrzMultiSelect}
+        components: {BtrzMultiSelect},
+        data: {data: [0,2]}
       }),
     selected = $("select option:selected");
     expect(selected.text().indexOf('option1')).to.not.equal(-1);
     expect(selected.text().indexOf('option3')).to.not.equal(-1);
     expect(selected.length).to.equal(2);
-  });
-
-  it("should render the select as disabled if there're no options to show.", () => {
-    insertHTML(`<div id="app">
-                  <btrz-multi-select
-                  id="id"
-                  label="label"
-                  errors="">
-                  </btrz-multi-select>
-                </div>`);
-
-    const app = new Vue({
-        el: "#app",
-        components: {BtrzMultiSelect}
-      }),
-    select = $("select");
-    expect(select.attr("disabled")).to.equal("disabled");
   });
 });

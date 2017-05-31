@@ -7,15 +7,15 @@
     }">
     <btrz-label :id="id" :label="label"></btrz-label>
     <select
+      ref="multiselect"
       multiple
-      :disabled="!selectEnabled"
       class="form-control"
       rows="4"
       :id="id"
-      v-model="selectedOptions"
+      @input="valueUpdated($event.target.value);"
       @blur="focusUpdated('blur', $event.target.value);"
       @focus="focusUpdated('focus', $event.target.value);">
-      <option v-for="option in value" :value="option.key" :selected="option.selected">{{option.value}}</option>
+      <option v-for="option in options" v-bind:value="option.key">{{option.value}}</option>
     </select>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
@@ -35,52 +35,45 @@
       label: { type: String },
       errors: { type: Object },
       options: { type: Object },
-      value: { type: Object }
+      value: { type: Array }
     },
     computed: {
-      selectEnabled: {
-        get() {
-          if (this.value && this.value.length > 0) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-      },
       hasError: {
         get() { return this.errors && this.errors.length > 0 }
-      }
-    },
-    watch: {
-      selectedOptions(newValue) {
-        this.value.forEach(function(element) {
-          element.selected = false;
-        });
-        newValue.forEach((element) => {
-          this.value[element].selected = true;
-        });
+      },
+      isEmpty: {
+        get() {
+          return this.value.length === 0;
+        }
       }
     },
     mounted() {
-      var options = [];
-      this.value.forEach(function(option){
-        if(option.selected == true) {
-          options.push(option.key);
-        }
-      });
-      this.selectedOptions = options;
+      for (var i = 0; i < this.value.length; i++) {
+        this.$refs.multiselect.options[this.value[i]].selected = true;
+      }
     },
     methods: {
+      valueUpdated(value) {
+        this.value = [];
+        for (let i = 0; i< this.$refs.multiselect.options.length; i++) {
+          if (this.$refs.multiselect.options[i].selected) {
+            this.value.push(this.$refs.multiselect.options[i].value);
+          }
+        }
+        this.$emit('input', this.value);
+      },
       focusUpdated(focus, value) {
         this.$emit(focus, value);
         this.focused = !this.focused;
       },
       focus() {
-        this.$refs.input.focus();
+        this.$refs.multiselect.focus();
       }
     },
     data() {
-      return {isEmpty: true, focused: false, selectedOptions: []};
+      return {
+        focused: false
+      };
     }
   }
 </script>
