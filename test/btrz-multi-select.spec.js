@@ -11,7 +11,7 @@ describe("BtrzMultiSelect", () => {
                   id="id"
                   label="label"
                   v-model="data"
-                  :options="[{'key': 0, 'value': 'option1', selected: false}, {'key': 2, 'value': 'option2', selected: true}, {'key': 3, 'value': 'option3', selected: false}]"
+                  :options="[{'key': 0, 'value': 'option1'}, {'key': 2, 'value': 'option2'}, {'key': 3, 'value': 'option3'}]"
                   errors="">
                   </btrz-multi-select>
                 </div>`);
