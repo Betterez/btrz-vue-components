@@ -45,12 +45,9 @@ export default {
   },
   methods: {
     timeChange() {
-      console.log("timeChange");
       this.inputRangeSelect();
-      let hours = parseInt(this.value.split(':')[0] || "00");
-      let minutes = parseInt(this.value.split(':')[1] || "00");
-      console.log(hours)
-      console.log(minutes)
+      let hours = this.getHour();
+      let minutes = this.getMinutes();
       if(hours > 23) {
         hours = 23;
       }
@@ -64,37 +61,33 @@ export default {
     onKeyDown(event) {
       var valid = "0123456789";
       let pressed = event.key || String.fromCharCode(event.keyCode);
-      let hours = parseInt(this.value.split(':')[0] || "00");
-      let minutes = parseInt(this.value.split(':')[1] || "00");
+      let hours = this.getHour();
+      let minutes = this.getMinutes();
       let restrictedInHours = '3456789';
       let restrictedInMinutes = '6789';
-      if (this.value.split(":")[0].length === 1) {
-        if(parseInt(this.value.charAt(0)) === 2) {
-          valid = '0123';
-        }
-        if(restrictedInHours.indexOf(this.value.charAt(0)) !== -1){
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }
-      if (this.value.split(":")[1].length === 1) {
-        if(parseInt(this.value.charAt(3)) === 2) {
-          valid = '012345';
-        }
-        if(restrictedInMinutes.indexOf(this.value.charAt(3)) !== -1){
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }
-      if(this.$refs.timepicker.selectionStart >= 5) {
+      if (valid.indexOf(pressed) === -1) {
         event.preventDefault();
         event.stopPropagation();
-      }
-      if (valid.indexOf(pressed) === -1 || event.key === "BackSpace") {
-        if(this.controlEnabled) {
-          this.controlEnabled = false;
-          this.$emit('timeChange', this.value);
-        } else {
+      } else {
+        if (this.value.split(":")[0].length === 1) {
+          if(parseInt(this.value.charAt(0)) === 2) {
+            valid = '0123';
+          }
+          if(restrictedInHours.indexOf(this.value.charAt(0)) !== -1){
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }
+        if (this.value.split(":")[1].length === 1) {
+          if(parseInt(this.value.charAt(3)) === 2) {
+            valid = '012345';
+          }
+          if(restrictedInMinutes.indexOf(this.value.charAt(3)) !== -1){
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }
+        if(this.$refs.timepicker.selectionStart >= 5) {
           event.preventDefault();
           event.stopPropagation();
         }
@@ -106,10 +99,6 @@ export default {
         this.$emit('timeChange', this.value);
       }
       this.value = value;
-      if (this.selectedElement === 'hours') {
-      }
-      if (this.selectedElement === 'minutes') {
-      }
     },
     inputRangeSelect() {
       if (this.selectedElement === 'hours') {
@@ -146,8 +135,8 @@ export default {
       this.$emit('timeChange', this.value);
     },
     increaseElement() {
-      let hours = parseInt(this.value.split(':')[0] || "00");
-      let minutes = parseInt(this.value.split(':')[1] || "00");
+      let hours = this.getHour();
+      let minutes = this.getMinutes();
       if(this.selectedElement === 'hours') {
         if (hours < 23) {
           hours = hours +1;
@@ -168,8 +157,8 @@ export default {
       this.$emit('timeChange', this.value);
     },
     decreaseElement() {
-      let hours = parseInt(this.value.split(':')[0] || "00");
-      let minutes = parseInt(this.value.split(':')[1] || "00");
+      let hours = this.getHour();
+      let minutes = this.getMinutes();
       if(this.selectedElement === 'hours') {
         if (hours > 0) {
           hours = hours -1;
@@ -188,6 +177,12 @@ export default {
       let _minutes = (minutes<=9) ? "0" + minutes : minutes;
       this.value = _hours +":"+ _minutes;
       this.$emit('timeChange', this.value);
+    },
+    getHour() {
+      return parseInt(this.value.split(':')[0] || "00");
+    },
+    getMinutes() {
+      return parseInt(this.value.split(':')[1] || "00");
     }
   },
   mounted() {
@@ -195,8 +190,7 @@ export default {
   },
   data () {
     return {
-      selectedElement: null,
-      controlEnabled: false
+      selectedElement: null
     }
   }
 }
