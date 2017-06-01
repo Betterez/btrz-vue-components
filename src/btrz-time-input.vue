@@ -13,8 +13,7 @@
       :value="value"
       :disabled="disabled"
       @keydown="onKeyDown"
-      @keyup="onKeyUp"
-      @input="userInput($event.target.value)"
+      @keyup="onKeyUp($event.target.value)"
       @click="selectElement"
       @keydown.right="switchElement"
       @keydown.left="switchElement"
@@ -116,7 +115,8 @@ export default {
         }
       }
     },
-    userInput(value){
+    onKeyUp(value){
+      // If insert position is 2, select minutes
       if(this.$refs.timepicker.selectionStart === 2) {
         this.selectedElement = 'minutes';
         this.$emit('timeChange', this.value);
