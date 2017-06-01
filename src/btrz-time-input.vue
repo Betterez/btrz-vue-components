@@ -16,10 +16,12 @@
       @keyup="onKeyUp"
       @input="userInput(this.event.target.value)"
       @click="selectElement"
-      @keydown.right="nextElement"
-      @keydown.left="prevElement"
+      @keydown.right="switchElement"
+      @keydown.left="switchElement"
       @keydown.up="increaseElement"
-      @keydown.down="decreaseElement">
+      @keydown.down="decreaseElement"
+      @blur="focusUpdated('blur', $event.target.value);"
+      @focus="focusUpdated('focus', $event.target.value);"/>
   </div>
 </template>
 
@@ -41,6 +43,17 @@ export default {
     },
     disabled: {
       type: Boolean
+    },
+    errors: {type: String}
+  },
+  computed: {
+    hasError: {
+      get() { return this.errors && this.errors.length > 0 }
+    },
+    isEmpty: {
+      get() {
+        return !Boolean(this.value);
+      }
     }
   },
   methods: {
@@ -65,10 +78,17 @@ export default {
       let minutes = this.getMinutes();
       let restrictedInHours = '3456789';
       let restrictedInMinutes = '6789';
+      // Avoid selecting all the input content.
+      if(this.$refs.timepicker.selectionStart === 0 && this.$refs.timepicker.selectionEnd) {
+        this.$refs.timepicker.selectionStart = 0;
+        this.$refs.timepicker.selectionEnd = 2;
+      }
+      // Enable only numbers to be inserted
       if (valid.indexOf(pressed) === -1) {
         event.preventDefault();
         event.stopPropagation();
       } else {
+        // if hours selected and hours have one digit and its 0 next valids are 0123
         if (this.value.split(":")[0].length === 1) {
           if(parseInt(this.value.charAt(0)) === 2) {
             valid = '0123';
@@ -78,6 +98,7 @@ export default {
             event.stopPropagation();
           }
         }
+        // if minutes selected and minutes have one digit and its a 2 next valids are 012345
         if (this.value.split(":")[1].length === 1) {
           if(parseInt(this.value.charAt(3)) === 2) {
             valid = '012345';
@@ -87,6 +108,7 @@ export default {
             event.stopPropagation();
           }
         }
+        // No input allowed beyond 5 digits
         if(this.$refs.timepicker.selectionStart >= 5) {
           event.preventDefault();
           event.stopPropagation();
@@ -113,14 +135,10 @@ export default {
       else if (this.$refs.timepicker.createTextRange) { var range = this.$refs.timepicker.createTextRange(); range.collapse(true); range.moveEnd('character', end); range.moveStart('character', start); range.select(); } /* IE */
       else if (this.$refs.timepicker.selectionStart) { this.$refs.timepicker.selectionStart = start; this.$refs.timepicker.selectionEnd = end; }
     },
-    nextElement(element) {
+    switchElement(element) {
       if(this.selectedElement === 'hours'){
         this.selectedElement = 'minutes';
-      }
-      this.$emit('timeChange', this.value);
-    },
-    prevElement(element) {
-      if(this.selectedElement === 'minutes'){
+      } else {
         this.selectedElement = 'hours';
       }
       this.$emit('timeChange', this.value);
@@ -183,6 +201,10 @@ export default {
     },
     getMinutes() {
       return parseInt(this.value.split(':')[1] || "00");
+    },
+    focusUpdated(focus, value) {
+      this.$emit(focus, value);
+      this.focused = !this.focused;
     }
   },
   mounted() {
@@ -190,7 +212,8 @@ export default {
   },
   data () {
     return {
-      selectedElement: null
+      selectedElement: null,
+      focused: false
     }
   }
 }
