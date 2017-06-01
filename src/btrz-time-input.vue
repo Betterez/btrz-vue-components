@@ -14,7 +14,7 @@
       :disabled="disabled"
       @keydown="onKeyDown"
       @keyup="onKeyUp"
-      @input="userInput(this.event.target.value)"
+      @input="userInput($event.target.value)"
       @click="selectElement"
       @keydown.right="switchElement"
       @keydown.left="switchElement"
@@ -22,6 +22,7 @@
       @keydown.down="decreaseElement"
       @blur="focusUpdated('blur', $event.target.value);"
       @focus="focusUpdated('focus', $event.target.value);"/>
+      <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
 
