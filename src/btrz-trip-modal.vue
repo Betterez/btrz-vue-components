@@ -26,7 +26,7 @@
               </li>
               <ul>
                 <li v-for="(stop, j) of segment.stops" v-if="j != 0">
-                  <div class="big-text">{{stop.departure | | formatTime(accountPreferences.timeFormat[0])}} <span>{{stop.name}}</span></div>
+                  <div class="big-text">{{stop.departure | formatTime(accountPreferences.timeFormat[0])}} <span>{{stop.name}}</span></div>
                 </li>
                 <i class="fa fa-arrow-down fromto-arrow fa-lg" v-if="!(segment.stops.length > 1)"></i>
               </ul>
