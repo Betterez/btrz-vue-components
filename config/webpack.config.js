@@ -3,10 +3,6 @@ const webpack = require("webpack");
 
 
 module.exports = {
-  output: {
-    path: path.resolve(__dirname),
-    filename: "../dist/bundle.js"
-  },
   resolve: {
     extensions: [".js", ".vue", ".json"],
     alias: {

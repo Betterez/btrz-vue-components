@@ -4,7 +4,7 @@ import {expect} from "chai";
 import { mount } from 'avoriaz';
 import BtrzTimeInput from "../src/btrz-time-input";
 
-describe.only("BtrzTimeInput", () => {
+describe("BtrzTimeInput", () => {
   it("Value and Disabled Props values should bind to component.", () => {
     const wrapper = mount(BtrzTimeInput, {propsData: {value: "13:37", disabled: false}});
     expect(wrapper.vm.$props.value).to.equal("13:37");

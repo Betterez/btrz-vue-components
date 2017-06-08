@@ -23,7 +23,7 @@ describe("BtrzProductCard", () => {
   it("should render product link", () => {
     const baseUrl = "cart/accountId",
       vm = mountComponent(BtrzProductCard, {product, baseUrl});
-    expect(vm.$el.href).to.be.eql("cart/accountId/reservation/123456789");
+    expect(vm.$el.href.endsWith("cart/accountId/reservation/123456789"));
   });
 
   it("should render product icon", () => {
