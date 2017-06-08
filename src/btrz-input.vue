@@ -9,6 +9,7 @@
     <div class="input-group">
       <span v-if="prefix" class="input-group-addon">{{prefix}}</span>
       <input class="form-control"
+      :class="{'text-right': textAlign==='right', 'text-center': textAlign==='center'}"
       ref="input"
       :id="id"
       :disabled="disabled"
@@ -31,21 +32,60 @@
   import BtrzErrors from "../../btrz-vue-components/src/btrz-errors";
   export default {
     name: "BtrzInput",
+    token: "<btrz-input class=\"form-group\" id=\"myId\" name=\"nameName\" value=\"myValue\" label=\"myLabel\"></btrz-input>",
+    description: "This is a very basic but versatil input.",
     components:{
       BtrzLabel,
       BtrzErrors
     },
     props: {
-      placeholder: {type: String},
-      type: {type: String},
-      name: {type: String},
-      value: {type: String},
-      id: {type: String},
-      label: {type: String},
-      errors: {type: String},
-      prefix: {type: String},
-      postfix: {type: String},
-      disabled: {type: Boolean}
+      placeholder: {
+        type: String,
+        note: "A placeholder to show when the input is empty."
+      },
+      type: {
+        type: String,
+        default: 'text',
+        note: "The HTML input type. (text, number, email, etc)"
+      },
+      name: {
+        type: String,
+        note: "The name the input will have."
+      },
+      value: {
+        type: String,
+        note: "Starting value for the component."
+      },
+      id: {
+        type: String,
+        note: "Id for the component, is used for the label 'for' attr."
+      },
+      label: {
+        type: String,
+        note: "A label to be appended after the input."
+      },
+      errors: {
+        type: String,
+        note: "The error to display."
+      },
+      prefix: {
+        type: String,
+        note: "This can be used to display something before the input."
+      },
+      postfix: {
+        type: String,
+        note: "This can be used to display something after the input."
+      },
+      disabled: {
+        type: Boolean,
+        default: false,
+        note: "This is the disabled/enabled property of the input."
+      },
+      textAlign: {
+        type: String,
+        default: 'left',
+        note: 'This add a class to the input to change the alignment of the input content.'
+      }
     },
     computed: {
       hasError: {
@@ -74,3 +114,12 @@
     }
   }
 </script>
+
+<style scoped>
+  .text-right{
+    text-align: right;
+  }
+  .text-center{
+    text-align: center;
+  }
+</style>
