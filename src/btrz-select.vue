@@ -63,10 +63,3 @@
   };
 
 </script>
-
-<style scoped>
-  .default-selected {
-    border: 1px solid #848484;
-    padding: 0 0 0 10px;
-  }
-</style>
