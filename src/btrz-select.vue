@@ -1,6 +1,7 @@
 <template>
   <select ref="select"
           class="chevron-down-bkg"
+          :class="{'default-selected': this.selected === ''}"
           @change="propagateChange($event.target.value)"
           v-model="selected"
           :disabled="disabled">
@@ -62,3 +63,10 @@
   };
 
 </script>
+
+<style scoped>
+  .default-selected {
+    border: 1px solid #848484;
+    padding: 0 0 0 10px;
+  }
+</style>
