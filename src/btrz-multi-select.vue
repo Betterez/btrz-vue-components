@@ -53,6 +53,11 @@
       }
     },
     methods: {
+      cleanSelecteds() {
+        for (let i = 0; i< this.$refs.multiselect.options.length; i++) {
+          this.$refs.multiselect.options[i].selected = false;
+        }
+      },
       valueUpdated(value) {
         this.value = [];
         for (let i = 0; i< this.$refs.multiselect.options.length; i++) {
