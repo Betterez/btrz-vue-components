@@ -18,6 +18,8 @@
       :value="value"
       :placeholder="placeholder"
       :label="label"
+      :min="min"
+      :max="max"
       @input="valueUpdated($event.target.value);"
       @blur="focusUpdated('blur', $event.target.value);"
       @focus="focusUpdated('focus', $event.target.value);"/>
@@ -85,6 +87,14 @@
         type: String,
         default: 'left',
         note: 'This add a class to the input to change the alignment of the input content.'
+      },
+      min: {
+        type: Number,
+        note: 'This is the minimum amount for the input'
+      },
+      max: {
+        type: Number,
+        note: 'This is the maximum amount for the input'
       }
     },
     computed: {
