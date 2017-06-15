@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <btrz-label :id="id" :label="label"></btrz-label>
-    <select ref="select"
+  <div :class="{ 'input--focused': focused, 'bz-has-error': hasError }">
+  <btrz-label :id="id" :label="label"></btrz-label>
+  <select ref="select"
     :class="`chevron-down-bkg ${classes} ${(this.selected === '') ? 'default-selected' : ''}`"
-    @change="propagateChange($event.target.value)"
+    :disabled="disabled"
     v-model="selected"
-    :disabled="disabled">
+    @change="propagateChange($event.target.value)"
+    @blur="focusUpdated('blur', $event.target.value);"
+    @focus="focusUpdated('focus', $event.target.value);">
     <option value="" v-if="firstOption" :value="firstOption.value">{{firstOption.text}}</option>
     <option v-for="option in options" :value="option.value">
       {{option.text}}
@@ -60,6 +62,9 @@
         "default": false
       }
     },
+    data() {
+      return {focused: false}
+    },
     model: {
       prop: "selectedValue",
       event: "change"
@@ -72,6 +77,10 @@
       },
       propagateChange(newValue) {
         this.$emit("change", newValue);
+      },
+      focusUpdated(focus, value) {
+        this.$emit(focus, value);
+        this.focused = !this.focused;
       }
     },
     computed: {
