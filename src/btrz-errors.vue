@@ -1,7 +1,7 @@
 <template>
     <div v-if="errors" class="errors">
       <div v-for="error in errors" class="error">
-        {{ $t(error.message) || error.message }}
+        <p class="bz-input-error"><i class="fa fa-exclamation-circle"></i> <span>{{ $t(error.message) || error.message }}</span></p>
       </div>
     </div>
 </template>
