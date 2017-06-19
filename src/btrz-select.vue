@@ -84,6 +84,9 @@
       }
     },
     computed: {
+      hasError: {
+        get() { return this.errors && this.errors.length > 0 }
+      },
       selected() {
         return this.selectedValue;
       }
