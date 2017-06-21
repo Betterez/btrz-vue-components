@@ -32,8 +32,7 @@ describe("BtrzSelect", () => {
     const vm = mountComponent(BtrzSelect, {
       disabled: true
     });
-
-    expect($(vm.$el).attr("disabled")).to.be.eql("disabled");
+    expect($(vm.$el).find("select").attr("disabled")).to.be.eql("disabled");
   });
 
   it("should render the first option if specified", () => {
