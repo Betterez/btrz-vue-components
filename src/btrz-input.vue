@@ -20,6 +20,8 @@
       :label="label"
       :min="min"
       :max="max"
+      :maxlength="maxlength"
+      :autocomplete="autocomplete"
       @input="valueUpdated($event.target.value);"
       @blur="focusUpdated('blur', $event.target.value);"
       @focus="focusUpdated('focus', $event.target.value);"/>
@@ -95,6 +97,13 @@
       max: {
         type: Number,
         note: 'This is the maximum amount for the input'
+      },
+      maxlength: {
+        type: String,
+        note: "Max length native attrs for the input"
+      },
+      autocomplete: {
+        type: String
       }
     },
     computed: {

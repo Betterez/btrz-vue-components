@@ -4,6 +4,7 @@
   <select ref="select"
     :class="`chevron-down-bkg ${classes} ${(this.selected === '') ? 'default-selected' : ''}`"
     :disabled="disabled"
+    :name="name"
     v-model="selected"
     @change="propagateChange($event.target.value)"
     @blur="focusUpdated('blur', $event.target.value);"
@@ -60,6 +61,9 @@
       disabled: {
         type: Boolean,
         "default": false
+      },
+      name: {
+        type: String
       }
     },
     data() {
