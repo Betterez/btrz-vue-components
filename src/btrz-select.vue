@@ -1,20 +1,23 @@
 <template>
   <div :class="{ 'input--focused': focused, 'bz-has-error': hasError }">
-  <btrz-label :id="id" :label="label"></btrz-label>
-  <select ref="select"
-    :class="`chevron-down-bkg ${classes} ${(this.selected === '') ? 'default-selected' : ''}`"
-    :disabled="disabled"
-    :name="name"
-    v-model="selected"
-    @change="propagateChange($event.target.value)"
-    @blur="focusUpdated('blur', $event.target.value);"
-    @focus="focusUpdated('focus', $event.target.value);">
-    <option value="" v-if="firstOption" :value="firstOption.value">{{firstOption.text}}</option>
-    <option v-for="option in options" :value="option.value">
-      {{option.text}}
-    </option>
-  </select>
-  <btrz-errors :errors="errors"></btrz-errors>
+    <btrz-label :id="id" :label="label"></btrz-label>
+    <div class="btrz-input-group">
+      <select ref="select"
+      :id="id"
+      :name="name"
+      :class="`chevron-down-bkg ${classes} ${(this.selected === '') ? 'default-selected' : ''}`"
+      :disabled="disabled"
+      v-model="selected"
+      @change="propagateChange($event.target.value)"
+      @blur="focusUpdated('blur', $event.target.value);"
+      @focus="focusUpdated('focus', $event.target.value);">
+      <option value="" v-if="firstOption" :value="firstOption.value">{{firstOption.text}}</option>
+      <option v-for="option in options" :value="option.value">
+        {{option.text}}
+      </option>
+    </select>
+    </div>
+    <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
 
