@@ -1,15 +1,17 @@
 <template>
-  <div class="fare-item">
+  <div tabindex="0" class="fare-item" :class="{'input--focused': focused}" @focus="switchFocus()" @blur="switchFocus()" @keydown.up="increment($event)"
+  @keydown.down="decrement($event)">
     <div class="fare-detail flex-container">
-      <button class="minus-icon flex-item" type="button" @click="decrement()" >
+      <button tabindex="-1" class="minus-icon flex-item" type="button" @click="decrement()" >
         <i class="fa fa-minus-square-o"></i>
       </button>
       <div class="fare-title  flex-item">
-        <input type="text" v-model="quantity" :name="name" readonly/>
+        {{quantity}}
+        <input type="text" v-model="quantity" :name="name" hidden/>
         {{ title }}
         <div class="fare-description">{{description}}</div>
       </div>
-      <button class="plus-icon flex-item" type="button" @click="increment()">
+      <button tabindex="-1" class="plus-icon flex-item" type="button" @click="increment()">
         <i class="fa fa-plus-square-o"></i>
       </button>
     </div>
@@ -30,17 +32,22 @@
     },
     data() {
       return {
-        "quantity": this.initialValue
+        "quantity": this.initialValue, "focused":false
       };
     },
     methods: {
-      increment() {
+      switchFocus() {
+        this.focused = !this.focused;
+      },
+      increment(e) {
+        if (e) { e.preventDefault(); }
         if (this.quantity < this.max) {
           this.quantity++;
           this.$emit("quantityChanged", {id: this.id, quantity: this.quantity});
         }
       },
-      decrement() {
+      decrement(e) {
+        if (e) { e.preventDefault(); }
         if (this.quantity > this.min) {
           this.quantity--;
           this.$emit("quantityChanged", {id: this.id, quantity: this.quantity});
