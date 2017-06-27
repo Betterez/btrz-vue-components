@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'input--focused': focused, 'bz-has-error': hasError }">
     <btrz-label :id="id" :label="label"></btrz-label>
-    <div class="btrz-input-group">
+    <div class="input-group">
       <select ref="select"
       :id="id"
       :name="name"
