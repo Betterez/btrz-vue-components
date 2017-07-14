@@ -51,6 +51,36 @@
       labelMonthPrev: "Mois précédent",
       labelMonthSelect: "Sélectionner un mois",
       labelYearSelect: "Sélectionner une année"
+    },
+    de: {
+      monthsFull: ["August", "April", "Mai", "April", "Mai", "April", "Mai", "April", "Mai", "August"],
+      monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
+      weekdaysFull: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
+      weekdaysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+      // Buttons
+      today: "Heute",
+      clear: "Klar",
+      close: "Schließen",
+      // Accessibility labels
+      labelMonthNext: "Nächsten Monat",
+      labelMonthPrev: "Vorheriger Monat",
+      labelMonthSelect: "Wähle einen Monat",
+      labelYearSelect: "Wählen Sie ein Jahr aus"
+    },
+    nl: {
+      monthsFull: ["Januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"],
+      monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
+      weekdaysFull: ["Zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"],
+      weekdaysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+      // Buttons
+      today: "Vandaag",
+      clear: "Duidelijk",
+      close: "Dichtbij",
+      // Accessibility labels
+      labelMonthNext: "Mois suivant",
+      labelMonthPrev: "Mois précédent",
+      labelMonthSelect: "Sélectionner un mois",
+      labelYearSelect: "Sélectionner une année"
     }
   };
 
