@@ -27,7 +27,7 @@
       @focus="focusUpdated('focus', $event.target.value);"/>
       <span v-if="postfix" class="input-group-addon">{{postfix}}</span>
     </div>
-    <btrz-help-text v-if="!errors" :text="helptext"></btrz-help-text>    
+    <btrz-help-text v-if="helptext && !errors" :text="helptext"></btrz-help-text>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
