@@ -27,6 +27,7 @@
       @focus="focusUpdated('focus', $event.target.value);"/>
       <span v-if="postfix" class="input-group-addon">{{postfix}}</span>
     </div>
+    <btrz-help-text v-if="!errors" :text="helptext"></btrz-help-text>    
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
@@ -34,13 +35,15 @@
 <script>
   import BtrzLabel from "../../btrz-vue-components/src/btrz-label";
   import BtrzErrors from "../../btrz-vue-components/src/btrz-errors";
+  import BtrzHelpText from "../../btrz-vue-components/src/btrz-help-text";
   export default {
     name: "BtrzInput",
     token: "<btrz-input class=\"form-group\" id=\"myId\" name=\"nameName\" value=\"myValue\" label=\"myLabel\"></btrz-input>",
     description: "This is a very basic but versatil input.",
     components:{
       BtrzLabel,
-      BtrzErrors
+      BtrzErrors,
+      BtrzHelpText
     },
     props: {
       placeholder: {
@@ -104,8 +107,12 @@
       },
       autocomplete: {
         type: String
+      },
+      helptext: {
+        type: String,
+        note: "Text to show in a help-block span." 
       }
-    },
+    },    
     computed: {
       hasError: {
         get() { return this.errors && this.errors.length > 0 }
