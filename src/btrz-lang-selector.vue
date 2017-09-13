@@ -4,7 +4,7 @@
       <select :value="lang" v-on:change="changeLang($event.target.value)">
         <option v-if="languages.en" value="en">English</option>
         <option v-if="languages.fr" value="fr">Français</option>
-        <option v-if="languages.de" value="de">Deutsche</option>
+        <option v-if="languages.de" value="de">Deutsch</option>
         <option v-if="languages.nl" value="nl">Nederlands</option>
       </select>
     </span>
