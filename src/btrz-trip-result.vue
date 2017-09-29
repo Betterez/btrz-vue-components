@@ -10,7 +10,7 @@
       <a class="check-trip phone trip-selection" @click="$emit('tripSelected', trip)"><i class="fa fa-check large-faicon"></i></a>
       <div class="small-text">{{$t('travelTime')}}</div>
       <div>{{trip.duration}}</div>
-      <a :href="`#${index}`" data-toggle="modal">{{$t('tripDetails')}}</a>
+      <a class="trip-details" :href="`#${index}`" @click="$emit('openTripDetails')" data-toggle="modal">{{$t('tripDetails')}}</a>
     </div>
     <div class="col-xs-12 col-sm-3">
       <ul class="fare-list">
