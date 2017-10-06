@@ -8,6 +8,7 @@
     <input class="form-control calendar-bkg"
     ref="input"
     :id="id"
+    :name="name"
     :disabled="disabled"
     @input="valueUpdated($event.target.value);"
     @blur="focusUpdated('blur', $event.target.value);"
