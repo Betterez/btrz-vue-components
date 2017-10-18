@@ -162,7 +162,7 @@
       },
       getTranslation(lang) {
         if (!(this.lang in pickadateI18nStrings)) {
-          this.logger.warn("Could not find the specified language, defaulting to english...");
+          this.logger.warn(`Could not find the ${this.lang} language, defaulting to english...`);
           return pickadateI18nStrings.en;
         }
         return pickadateI18nStrings[lang];

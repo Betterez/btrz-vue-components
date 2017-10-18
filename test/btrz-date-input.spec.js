@@ -96,7 +96,7 @@ describe("BtrzDateInput", () => {
         logger: {warn: warnSpy}
       }
     });
-    expect(warnSpy).to.have.been.calledOnce;
+    expect(warnSpy.withArgs("Could not find the ja language, defaulting to english...").calledOnce).to.equal(true);
   });
 
   it("should disable the component if specified by a property", () => {
