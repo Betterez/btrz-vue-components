@@ -3,7 +3,12 @@
     <div class="col-xs-7 col-sm-4">
       <div class="small-text">{{trip.segments[0].departureDate}}</div>
       <div class="big-text">{{trip.departure | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.from}}</span></div>
-      <i class="fa fa-arrow-down fromto-arrow fa-lg"></i>
+      <div>
+      	<i class="fa fa-arrow-down fromto-arrow fa-lg"></i>
+      	<div :class="`small ${index==0 ? 'text-success' : index==1 ? 'text-info' : 'text-warning'} text-uppercase transfer-indicator`">
+          {{index==0 ? $t("direct") : `${index} ${$t("transfer")}`}}
+        </div>
+      </div>
       <div class="big-text">{{trip.arrival | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.to}}</span></div>
     </div>
     <div class="travel-time-column text-right col-xs-5 col-sm-2">
