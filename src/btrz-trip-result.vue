@@ -5,8 +5,8 @@
       <div class="big-text">{{trip.departure | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.from}}</span></div>
       <div>
       	<i class="fa fa-arrow-down fromto-arrow fa-lg"></i>
-      	<div :class="`small ${index==0 ? 'text-success' : index==1 ? 'text-info' : 'text-warning'} text-uppercase transfer-indicator`">
-          {{index==0 ? $t("direct") : `${index} ${$t("transfer")}`}}
+      	<div :class="`small ${trip.segments[0].stops.length==1 ? 'text-success' : trip.segments[0].stops.length==2 ? 'text-info' : 'text-warning'} text-uppercase transfer-indicator`">
+          {{trip.segments[0].stops.length==1 ? $t("direct") : `${trip.segments[0].stops.length-1} ${$t("transfer")}`}}
         </div>
       </div>
       <div class="big-text">{{trip.arrival | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.to}}</span></div>
