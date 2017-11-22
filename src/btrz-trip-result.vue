@@ -6,7 +6,7 @@
       <div>
       	<i class="fa fa-arrow-down fromto-arrow fa-lg"></i>
       	<div :class="`small ${transferQty===0 ? 'text-success' : transferQty===1 ? 'text-info' : 'text-warning'} text-uppercase transfer-indicator`">
-          {{transferQty===0 ? $t("direct") : `${transferQty} ${$t("transfer")}`}}
+          {{transferQty===0 ? $t("direct") : transferQty===1 ? `${transferQty} ${$t("transfer")}` : `${transferQty} ${$t("transfers")}`}}
         </div>
       </div>
       <div class="big-text">{{trip.arrival | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.to}}</span></div>
