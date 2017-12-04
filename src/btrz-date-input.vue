@@ -101,6 +101,7 @@
       displayFormat: {type: String, "default": "dd mmmm, yyyy"}, // Pickadate format
       submitFormat: {type: String, "default": "YYYY-MM-DD"}, // Momentjs format
       minDate: {"default": false},
+      maxDate: {"default": false},
       lang: {type: String, required: true},
       disabled: {type: Boolean, "default": false},
       errors: {type: Object},
@@ -121,7 +122,10 @@
         this.picker.render(true);
       },
       minDate(newMinDate) {
-        this.setPickadateMinDate(newMinDate);
+        this.setPickadateLimit(newMinDate, "min");
+      },
+      maxDate(newMaxDate) {
+        this.setPickadateLimit(newMaxDate, "max");
       }
     },
     mounted() {
@@ -139,7 +143,8 @@
       const $input = $(this.$refs.input).pickadate(config);
       this.picker = $input.pickadate("picker");
       this.setPickadateDate(this.value);
-      this.setPickadateMinDate(this.minDate);
+      this.setPickadateLimit(this.minDate, "min");
+      this.setPickadateLimit(this.maxDate, "max");
     },
     methods: {
       formatDate(date) {
@@ -167,21 +172,21 @@
         }
         return pickadateI18nStrings[lang];
       },
-      setPickadateMinDate(minDate) {
-        let parsedMinDate = null;
-        if (minDate) {
-          parsedMinDate = this.submitFormat ? moment(minDate, this.submitFormat).toDate() : minDate;
+      setPickadateLimit(date, limit){
+        let parsedDate = null;
+        if (date) {
+          parsedDate = this.submitFormat ? moment(date, this.submitFormat).toDate() : date;
           const selectedDate = this.picker.get("select");
           if (selectedDate) {
-            if (moment(selectedDate.obj).isBefore(parsedMinDate, "days")) {
+            if (moment(selectedDate.obj).isBefore(parsedDate, "days")) {
               this.setPickadateDate(null);
               this.$emit("change", null);
             }
           }
         } else {
-          parsedMinDate = false;
+          parsedDate = false;
         }
-        this.picker.set("min", parsedMinDate);
+        this.picker.set(limit, parsedDate);
       },
       setPickadateDate(newDate) {
         let date = null;
