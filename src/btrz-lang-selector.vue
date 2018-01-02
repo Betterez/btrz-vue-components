@@ -6,6 +6,7 @@
         <option v-if="languages.fr" value="fr">Français</option>
         <option v-if="languages.de" value="de">Deutsch</option>
         <option v-if="languages.nl" value="nl">Nederlands</option>
+        <option v-if="languages.es" value="es">Español</option>
       </select>
     </span>
   </div>
