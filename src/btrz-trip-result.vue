@@ -1,6 +1,7 @@
 <template>
   <li>
     <div class="col-xs-7 col-sm-4">
+      <div class="small-text brand">{{trip.segments[0].brandName}}</div>
       <div class="small-text">{{trip.segments[0].departureDate}}</div>
       <div class="big-text">{{trip.departure | formatTime(accountPreferences.timeFormat[0])}} <span>{{trip.from}}</span></div>
       <div>
