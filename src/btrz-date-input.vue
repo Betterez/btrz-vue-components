@@ -172,13 +172,18 @@
         }
         return pickadateI18nStrings[lang];
       },
-      setPickadateLimit(date, limit){
+      setPickadateLimit(date, limit) {
         let parsedDate = null;
+
         if (date) {
           parsedDate = this.submitFormat ? moment(date, this.submitFormat).toDate() : date;
           const selectedDate = this.picker.get("select");
           if (selectedDate) {
-            if (moment(selectedDate.obj).isBefore(parsedDate, "days")) {
+            const isSelectedDateBeforeMinDate = (limit === "min" && moment(selectedDate.obj).isBefore(parsedDate, "days")),
+              isSelectedDateAfterMaxDate = (limit === "max" && moment(selectedDate.obj).isAfter(parsedDate, "days"));
+
+          // Clear value of input if the selected date is before the min date or after the max date
+            if ((isSelectedDateBeforeMinDate || isSelectedDateAfterMaxDate)) {
               this.setPickadateDate(null);
               this.$emit("change", null);
             }

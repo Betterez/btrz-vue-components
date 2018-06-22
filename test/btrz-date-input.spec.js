@@ -173,4 +173,29 @@ describe("BtrzDateInput", () => {
     });
   });
 
+  it("should emit a null value for change if the selectedDate is after the maxDate", (done) => {
+    const TODAY = moment(),
+      TOMORROW = moment().add(1, "days");
+
+    wrapper.vm.picker.set("select", TOMORROW.toDate(), {muted: true});
+    wrapper.setProps({maxDate: TODAY});
+
+    wrapper.vm.$on("change", (value) => {
+      expect(value).to.equal(null);
+      done();
+    });
+  });
+
+  it("should emit a null value for change if the selectedDate is before the minDate", (done) => {
+    const TODAY = moment(),
+      TOMORROW = moment().add(1, "days");
+
+    wrapper.vm.picker.set("select", TODAY.toDate(), {muted: true});
+    wrapper.setProps({minDate: TOMORROW});
+
+    wrapper.vm.$on("change", (value) => {
+      expect(value).to.equal(null);
+      done();
+    });
+  });
 });
