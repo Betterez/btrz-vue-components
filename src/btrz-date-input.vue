@@ -183,7 +183,7 @@
               isSelectedDateAfterMaxDate = (limit === "max" && moment(selectedDate.obj).isAfter(parsedDate, "days"));
 
           // Clear value of input if the selected date is before the min date or after the max date
-            if ((isSelectedDateBeforeMinDate || isSelectedDateAfterMaxDate)) {
+            if (isSelectedDateBeforeMinDate || isSelectedDateAfterMaxDate) {
               this.setPickadateDate(null);
               this.$emit("change", null);
             }
