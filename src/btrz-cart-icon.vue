@@ -1,6 +1,6 @@
 <template>
   <div v-if="cartId && qty > 0" class="flex-item user-nav cart-box">
-    <a class="ml-10 cart-link" :href="`${cartUrl}/${cartId}`">
+    <a class="ml-10 cart-link" @click="cartClicked">
       <span>({{qty}})</span>
       <i class="fa fa-lg fa-shopping-cart"></i>
     </a>
@@ -12,5 +12,10 @@
   export default {
     name: "BtrzCartIcon",
     props: ["cartUrl", "cartId", "qty"],
+    methods: {
+      cartClicked($event) {
+        this.$emit('click', $event);
+      }
+    }
   };
 </script>
