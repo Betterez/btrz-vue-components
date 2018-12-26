@@ -13,8 +13,8 @@
     name: "BtrzCartIcon",
     props: ["cartUrl", "cartId", "qty"],
     methods: {
-      cartClicked($event) {
-        this.$emit('click', $event);
+      cartClicked() {
+        this.$emit('click', `${this.cartUrl}/${this.cartId}`);
       }
     }
   };
