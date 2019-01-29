@@ -9,4 +9,7 @@
     text-shadow: none;
     font-size: 20px;
   }
+  .btrz-modal.hide-close-btn .close {
+    display: none
+  }
 </style>
