@@ -142,6 +142,11 @@
       const config = Object.assign(baseConfig, translations);
       const $input = $(this.$refs.input).pickadate(config);
       this.picker = $input.pickadate("picker");
+
+      $input.on('mousedown',function(event){
+         event.preventDefault();
+      })
+
       this.setPickadateDate(this.value);
       this.setPickadateLimit(this.minDate, "min");
       this.setPickadateLimit(this.maxDate, "max");
