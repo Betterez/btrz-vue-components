@@ -46,7 +46,7 @@
         type: String
       },
       errors: {
-        type: Object
+        type: Array
       },
       selectedValue: {
         "default": ""

@@ -11,7 +11,7 @@
     name: "BtrzErrors",
     props: {
       errors: {
-        type: Object
+        type: Array
       }
     }
   }
