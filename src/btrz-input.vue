@@ -72,8 +72,8 @@
         note: "A label to be appended after the input."
       },
       errors: {
-        type: String,
-        note: "The error to display."
+        type: Array,
+        note: "List of errors to display."
       },
       prefix: {
         type: String,

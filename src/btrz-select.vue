@@ -8,7 +8,6 @@
       :class="`chevron-down-bkg ${classes} ${(this.selected === '') ? 'default-selected' : ''}`"
       :disabled="disabled"
       v-model="selected"
-      @change="propagateChange($event.target.value)"
       @blur="focusUpdated('blur', $event.target.value);"
       @focus="focusUpdated('focus', $event.target.value);">
       <option value="" v-if="firstOption" :value="firstOption.value">{{firstOption.text}}</option>
@@ -70,7 +69,9 @@
       }
     },
     data() {
-      return {focused: false}
+      return {
+        focused: false
+      }
     },
     model: {
       prop: "selectedValue",
@@ -82,9 +83,6 @@
       focus() {
         this.$refs.select.focus();
       },
-      propagateChange(newValue) {
-        this.$emit("change", newValue);
-      },
       focusUpdated(focus, value) {
         this.$emit(focus, value);
         this.focused = !this.focused;
@@ -94,8 +92,13 @@
       hasError: {
         get() { return this.errors && this.errors.length > 0 }
       },
-      selected() {
-        return this.selectedValue;
+      selected: {
+        get() {
+          return this.selectedValue;
+        },
+        set(newValue) {
+          this.$emit("change", newValue);
+        }
       }
     }
   };

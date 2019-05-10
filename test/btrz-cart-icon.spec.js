@@ -15,10 +15,16 @@ describe("BtrzCartIcon", () => {
     expect(component.$el.innerHTML).to.equal(undefined);
   });
 
-  it("should not render cart link", () => {
+  it("should emit click with cart link", (done) => {
     const data= {cartUrl: "/cart2/accId/cart", cartId: "123", qty: 1},
       component = mountComponent(BtrzCartIcon, data);
-    expect(component.$el.innerHTML).to.include('href="/cart2/accId/cart/123"');
+
+    component.$on("click", (val) => {
+      expect(val).to.equal('/cart2/accId/cart/123');
+      done();
+    });
+
+    component.cartClicked();
   });
 
   it("should not render cart items quantity", () => {

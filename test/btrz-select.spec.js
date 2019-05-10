@@ -79,7 +79,7 @@ describe("BtrzSelect", () => {
         done();
       });
 
-      vm.propagateChange(EXPECTED_SELECTION);
+      vm.selected = EXPECTED_SELECTION;
     });
 
     it("should update the select value when changed from a parent component.", () => {
