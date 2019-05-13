@@ -162,6 +162,9 @@
       onSet(context) {
 
         if ("select" in context) {
+          if (typeof context.select === 'object' )
+            context.select = context.select.pick;     
+                 
           const date = this.formatDate(context.select);
           this.$emit("change", date);
           this.isEmpty = !Boolean(date);
