@@ -2,7 +2,7 @@
   <div tabindex="0" class="fare-item" :class="{'input--focused': focused}" @focus="switchFocus()" @blur="switchFocus()" @keydown.up="increment($event)"
   @keydown.down="decrement($event)">
     <div class="fare-detail flex-container">
-      <button tabindex="-1" class="minus-icon flex-item" type="button" @click="decrement()" >
+      <button :aria-label="$t('ariaLabelPlusButton')" tabindex="-1" class="minus-icon flex-item" type="button" @click="decrement()" >
         <i class="fa fa-minus-square-o"></i>
       </button>
       <div class="fare-title  flex-item">
@@ -11,7 +11,7 @@
         {{ title }}
         <div class="fare-description">{{description}}</div>
       </div>
-      <button tabindex="-1" class="plus-icon flex-item" type="button" @click="increment()">
+      <button :aria-label="$t('ariaLabelMinusButton')" tabindex="-1" class="plus-icon flex-item" type="button" @click="increment()">
         <i class="fa fa-plus-square-o"></i>
       </button>
     </div>
