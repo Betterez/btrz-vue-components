@@ -38,6 +38,9 @@
       BtrzErrors
     },
     props: {
+      id: {
+        type: String
+      },      
       classes: {
         type: String
       },
