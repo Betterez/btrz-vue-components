@@ -10,6 +10,7 @@
         <input type="text" v-model="quantity" :name="name" hidden/>
         {{ title }}
         <div class="fare-description">{{description}}</div>
+        <span aria-atomic="true" aria-live="assertive" class="sr-only"><span>{{quantity}}</span>&nbsp;{{ title }} selected.</span>
       </div>
       <button :aria-label="$t('ariaLabelPlusButton')" tabindex="-1" class="plus-icon flex-item" type="button" @click="increment()">
         <i class="fa fa-plus-square-o"></i>
