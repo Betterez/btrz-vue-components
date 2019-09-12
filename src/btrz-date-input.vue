@@ -13,6 +13,7 @@
     @input="valueUpdated($event.target.value);"
     @blur="focusUpdated('blur', $event.target.value);"
     @focus="focusUpdated('focus', $event.target.value);"/>
+    <span aria-atomic="true" aria-live="assertive" class="sr-only">{{displayDate}}</span>    
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
@@ -163,12 +164,17 @@
 
         if ("select" in context) {
           if (typeof context.select === 'object' )
-            context.select = context.select.pick;     
+            context.select = context.select.pick;  
+            
+          this.displayDate = this.$refs.input.value.concat(" selected.");            
                  
           const date = this.formatDate(context.select);
           this.$emit("change", date);
           this.isEmpty = !Boolean(date);
         } else if ("clear" in context) {
+
+          this.displayDate = "";
+
           this.$emit("change", null);
           this.isEmpty = !Boolean(null);
         }
@@ -229,7 +235,7 @@
       }
     },
     data() {
-      return {isEmpty: true, focused: false, inputValue: this.value};
+      return {displayDate: '', isEmpty: true, focused: false, inputValue: this.value};
     }
   };
 
