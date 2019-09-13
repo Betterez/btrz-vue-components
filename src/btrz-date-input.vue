@@ -13,7 +13,8 @@
     @input="valueUpdated($event.target.value);"
     @blur="focusUpdated('blur', $event.target.value);"
     @focus="focusUpdated('focus', $event.target.value);"/>
-    <span aria-atomic="true" aria-live="assertive" class="sr-only">{{displayDate}}</span>    
+    <span aria-atomic="true" aria-live="assertive" class="sr-only">{{displayDate}}</span>
+    <span id="highlightedDate" aria-atomic="true" aria-live="assertive" class="sr-only"></span>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
@@ -151,6 +152,16 @@
       this.setPickadateDate(this.value);
       this.setPickadateLimit(this.minDate, "min");
       this.setPickadateLimit(this.maxDate, "max");
+
+      const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
+      if (date) document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
+      document.querySelector(".picker").addEventListener("keyup", 
+        function() {
+          const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
+          document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
+        }
+      )
+
     },
     methods: {
       formatDate(date) {
@@ -174,7 +185,8 @@
         } else if ("clear" in context) {
 
           this.displayDate = "";
-
+          document.querySelector("#highlightedDate").innerHTML = "";
+          
           this.$emit("change", null);
           this.isEmpty = !Boolean(null);
         }
