@@ -158,7 +158,7 @@
       document.querySelector(".picker").addEventListener("keyup", 
         function(e) {
           var key = e.which || e.keyCode;
-          if (key === 27) return;
+          if (key === 27 || key === 13) return;
 
           const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
           document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
