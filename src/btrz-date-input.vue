@@ -137,6 +137,8 @@
 
       const baseConfig = {
         onSet: this.onSet,
+        onClose: this.onClose,
+        onOpen: this.onOpen,        
         format: this.displayFormat
       };
 
@@ -153,10 +155,11 @@
       this.setPickadateLimit(this.minDate, "min");
       this.setPickadateLimit(this.maxDate, "max");
 
-      const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
-      if (date) document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
       document.querySelector(".picker").addEventListener("keyup", 
-        function() {
+        function(e) {
+          var key = e.which || e.keyCode;
+          if (key === 27) return;
+
           const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
           document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
         }
@@ -171,6 +174,13 @@
           return date;
         }
       },
+      onOpen() {
+        const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
+        if (date) document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
+      },      
+      onClose() {
+        document.querySelector("#highlightedDate").innerHTML = "";
+      },      
       onSet(context) {
 
         if ("select" in context) {
@@ -185,7 +195,6 @@
         } else if ("clear" in context) {
 
           this.displayDate = "";
-          document.querySelector("#highlightedDate").innerHTML = "";
           
           this.$emit("change", null);
           this.isEmpty = !Boolean(null);
