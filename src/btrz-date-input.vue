@@ -165,6 +165,9 @@
         }
       )
 
+      document.querySelector(".picker__month").setAttribute("aria-hidden","true");
+      document.querySelector(".picker__year").setAttribute("aria-hidden","true");      
+
     },
     methods: {
       formatDate(date) {
