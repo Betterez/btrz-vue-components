@@ -94,6 +94,11 @@
       BtrzErrors
     },
     dependencies: ["logger"],
+    computed: {
+      getLabel() {
+        return this.label ? this.label.concat(" ") : "";
+      }
+    },    
     props: {
       id: {type: String},
       placeholder: {type: String},
@@ -165,9 +170,8 @@
         }
       )
 
-      document.querySelector(".picker__month").setAttribute("aria-hidden","true");
-      document.querySelector(".picker__year").setAttribute("aria-hidden","true");      
-
+      document.querySelector(".picker__wrap").setAttribute("aria-label","Use arrow keys to navigate");      
+     
     },
     methods: {
       formatDate(date) {
@@ -179,7 +183,7 @@
       },
       onOpen() {
         const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
-        if (date) document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
+        if (date) document.querySelector("#highlightedDate").innerHTML = this.getLabel.concat(date.getAttribute("aria-label"));
       },      
       onClose() {
         document.querySelector("#highlightedDate").innerHTML = "";
@@ -190,7 +194,7 @@
           if (typeof context.select === 'object' )
             context.select = context.select.pick;  
             
-          this.displayDate = this.$refs.input.value.concat(" selected.");            
+          this.displayDate = this.getLabel.concat(this.$refs.input.value.concat(" selected."));            
                  
           const date = this.formatDate(context.select);
           this.$emit("change", date);

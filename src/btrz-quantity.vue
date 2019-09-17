@@ -1,18 +1,18 @@
 <template>
   <div tabindex="0" class="fare-item" :class="{'input--focused': focused}" @focus="switchFocus()" @blur="switchFocus()" @keydown.up="increment($event)"
   @keydown.down="decrement($event)">
+    <span aria-atomic="true" aria-live="assertive" class="sr-only"><span>{{quantity}}</span>&nbsp;{{ title }} selected.</span>
     <div class="fare-detail flex-container">
-      <button :aria-label="$t('ariaLabelMinusButton')" tabindex="-1" class="minus-icon flex-item" type="button" @click="decrement()" >
+      <button aria-hidden="true" :aria-label="$t('ariaLabelMinusButton')" tabindex="-1" class="minus-icon flex-item" type="button" @click="decrement()" >
         <i class="fa fa-minus-square-o"></i>
       </button>
-      <div class="fare-title  flex-item">
+      <div class="fare-title  flex-item" aria-label="Use up and down arrow keys to increase and decrease.">
         {{quantity}}
         <input type="text" v-model="quantity" :name="name" hidden/>
         {{ title }}
         <div class="fare-description">{{description}}</div>
-        <span aria-atomic="true" aria-live="assertive" class="sr-only"><span>{{quantity}}</span>&nbsp;{{ title }} selected.</span>
       </div>
-      <button :aria-label="$t('ariaLabelPlusButton')" tabindex="-1" class="plus-icon flex-item" type="button" @click="increment()">
+      <button aria-hidden="true" :aria-label="$t('ariaLabelPlusButton')" tabindex="-1" class="plus-icon flex-item" type="button" @click="increment()">
         <i class="fa fa-plus-square-o"></i>
       </button>
     </div>
