@@ -1,5 +1,5 @@
 <template>
-  <div class="env-info">Version: <a :href="commitUrl" target="_blank">{{version}}</a> - ServerId: {{serverId}}</div>
+  <div class="env-info">Version: <a aria-hidden="true" tabindex="-1" :href="commitUrl" target="_blank">{{version}}</a> - ServerId: {{serverId}}</div>
 </template>
 
 <script>
