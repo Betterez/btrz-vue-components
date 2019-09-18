@@ -100,7 +100,7 @@
       }
     },    
     props: {
-      id: {type: String},
+      id: {type: String, default: ('_' + Math.random().toString(36).substr(2, 9))},
       placeholder: {type: String},
       name: {type: String},
       "value": {"default": null},
