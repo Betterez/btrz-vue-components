@@ -14,7 +14,7 @@
     @blur="focusUpdated('blur', $event.target.value);"
     @focus="focusUpdated('focus', $event.target.value);"/>
     <span aria-atomic="true" aria-live="assertive" class="sr-only">{{displayDate}}</span>
-    <span id="assertiveId" aria-atomic="true" aria-live="assertive" class="sr-only"></span>
+    <span :id="assertiveId" aria-atomic="true" aria-live="assertive" class="sr-only"></span>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
