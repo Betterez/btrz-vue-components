@@ -14,7 +14,7 @@
     @blur="focusUpdated('blur', $event.target.value);"
     @focus="focusUpdated('focus', $event.target.value);"/>
     <span aria-atomic="true" aria-live="assertive" class="sr-only">{{displayDate}}</span>
-    <span id="highlightedDate" aria-atomic="true" aria-live="assertive" class="sr-only"></span>
+    <span id="assertiveId" aria-atomic="true" aria-live="assertive" class="sr-only"></span>
     <btrz-errors :errors="errors"></btrz-errors>
   </div>
 </template>
@@ -95,9 +95,17 @@
     },
     dependencies: ["logger"],
     computed: {
+      getAriaLabel() {
+        if (this.ariaLabel) {
+          return this.ariaLabel.concat(" ");
+        } 
+        else {
+          return this.label ? this.label.concat(" ") : "";
+        }
+      },
       getLabel() {
         return this.label ? this.label.concat(" ") : "";
-      }
+      } 
     },    
     props: {
       id: {type: String, default: ('_' + Math.random().toString(36).substr(2, 9))},
@@ -112,7 +120,8 @@
       lang: {type: String, required: true},
       disabled: {type: Boolean, "default": false},
       errors: {type: Object},
-      label: {type: String}
+      label: {type: String},
+      ariaLabel: {type: String},      
     },
     model: {
       prop: "value",
@@ -166,7 +175,7 @@
           if (key === 27 || key === 13) return;
 
           const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
-          document.querySelector("#highlightedDate").innerHTML = date.getAttribute("aria-label");
+          document.querySelector("#".concat(this.assertiveId)).innerHTML = date.getAttribute("aria-label");
         }
       )
 
@@ -183,10 +192,10 @@
       },
       onOpen() {
         const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
-        if (date) document.querySelector("#highlightedDate").innerHTML = this.getLabel.concat(date.getAttribute("aria-label"));
+        if (date) document.querySelector("#".concat(this.assertiveId)).innerHTML = this.getAriaLabel.concat(date.getAttribute("aria-label"));
       },      
       onClose() {
-        document.querySelector("#highlightedDate").innerHTML = "";
+        document.querySelector("#".concat(this.assertiveId)).innerHTML = "";
       },      
       onSet(context) {
 
@@ -263,7 +272,12 @@
       }
     },
     data() {
-      return {displayDate: '', isEmpty: true, focused: false, inputValue: this.value};
+      return {
+        displayDate: '', 
+        isEmpty: true, 
+        focused: false, 
+        inputValue: this.value,
+        assertiveId: ('_' + Math.random().toString(36).substr(2, 9))};
     }
   };
 
