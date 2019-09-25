@@ -1,5 +1,5 @@
 <template>
-    <label :for="id" v-if="label">{{label}}</label>
+    <label :for="id" v-if="label" :aria-label="ariaLabel">{{label}}</label>
 </template>
 
 <script>
@@ -11,7 +11,10 @@
       },
       label: {
         type: String
-      }
+      },
+      ariaLabel: {
+        type: String
+      } 
     }
   }
 </script>

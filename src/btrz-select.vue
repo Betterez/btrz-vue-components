@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'input--focused': focused, 'bz-has-error': hasError }">
-    <btrz-label :id="id" :label="label"></btrz-label>
+    <btrz-label :id="id" :label="label" :aria-label="ariaLabel"></btrz-label>
     <div class="input-group">
       <select ref="select"
       :id="id"
@@ -47,6 +47,9 @@
       label: {
         type: String
       },
+      ariaLabel: {
+        type: String
+      },      
       errors: {
         type: Array
       },
