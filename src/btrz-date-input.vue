@@ -160,6 +160,7 @@
       const config = Object.assign(baseConfig, translations);
       const $input = $(this.$refs.input).pickadate(config);
       this.picker = $input.pickadate("picker");
+      this.pickerSelector = "#".concat(this.id, "_root");
 
       $input.on('mousedown',function(event){
          event.preventDefault();
@@ -169,17 +170,16 @@
       this.setPickadateLimit(this.minDate, "min");
       this.setPickadateLimit(this.maxDate, "max");
 
-      document.querySelector(".picker").addEventListener("keyup", 
-        function(e) {
-          var key = e.which || e.keyCode;
-          if (key === 27 || key === 13) return;
+      var updateAssertive = function(id, e) {
+        var key = e.which || e.keyCode;
+        if (key === 27 || key === 13) return;
 
-          const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
-          document.querySelector("#".concat(this.assertiveId)).innerHTML = date.getAttribute("aria-label");
-        }
-      )
+        const date = document.querySelector(this.pickerSelector.concat(" .picker__day.picker__day--infocus.picker__day--highlighted"));
+        document.querySelector("#".concat(id)).innerHTML = date.getAttribute("aria-label");
+      }
+      document.querySelector(this.pickerSelector).addEventListener("keyup", updateAssertive.bind(this, this.assertiveId) )
 
-      document.querySelector(".picker__wrap").setAttribute("aria-label","Use arrow keys to navigate");      
+      document.querySelector(this.pickerSelector.concat(" .picker__wrap")).setAttribute("aria-label","Use arrow keys to navigate");
      
     },
     methods: {
@@ -191,7 +191,7 @@
         }
       },
       onOpen() {
-        const date = document.querySelector(".picker__day.picker__day--infocus.picker__day--highlighted");
+        const date = document.querySelector(this.pickerSelector.concat(" .picker__day.picker__day--infocus.picker__day--highlighted"));
         if (date) document.querySelector("#".concat(this.assertiveId)).innerHTML = this.getAriaLabel.concat(date.getAttribute("aria-label"));
       },      
       onClose() {
@@ -277,7 +277,8 @@
         isEmpty: true, 
         focused: false, 
         inputValue: this.value,
-        assertiveId: ('_' + Math.random().toString(36).substr(2, 9))};
+        assertiveId: ('_' + Math.random().toString(36).substr(2, 9)),
+        pickerSelector: ''};
     }
   };
 
