@@ -179,7 +179,7 @@
       }
       document.querySelector(this.pickerSelector).addEventListener("keyup", updateAssertive.bind(this, this.assertiveId) )
 
-      document.querySelector(this.pickerSelector.concat(" .picker__wrap")).setAttribute("aria-label","Use arrow keys to navigate");
+      document.querySelector(this.pickerSelector.concat(" .picker__wrap")).setAttribute("aria-label", this.$t('ariaLabelDatePickerInstructions'));
      
     },
     methods: {
@@ -203,7 +203,7 @@
           if (typeof context.select === 'object' )
             context.select = context.select.pick;  
             
-          this.displayDate = this.getLabel.concat(this.$refs.input.value.concat(" selected."));            
+          this.displayDate = this.getLabel.concat(this.$refs.input.value.concat(this.$t('selected')));            
                  
           const date = this.formatDate(context.select);
           this.$emit("change", date);
