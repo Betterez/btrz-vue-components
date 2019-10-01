@@ -25,6 +25,21 @@
   import BtrzErrors from "../../btrz-vue-components/src/btrz-errors";
 
   const pickadateI18nStrings = {
+    es: {
+      monthsFull: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembere", "Octubre", "Novimbre", "Diciembre"],
+      monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+      weekdaysFull: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+      weekdaysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+      // Buttons
+      today: "Hoy",
+      clear: "Limpiar",
+      close: "Cerrar",
+      // Accessibility labels
+      labelMonthNext: "Mes siguiente",
+      labelMonthPrev: "Mes anterior",
+      labelMonthSelect: "Seleccione un mes",
+      labelYearSelect: "Seleccione un año",
+    },    
     en: {
       monthsFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
