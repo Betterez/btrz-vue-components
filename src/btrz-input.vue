@@ -5,7 +5,7 @@
       'input--filled': !isEmpty,
       'bz-has-error': hasError
     }">
-    <btrz-label :id="id" :label="label"></btrz-label>
+    <btrz-label :id="id" :label="label" :aria-label="ariaLabel"></btrz-label>
     <div class="input-group">
       <span v-if="prefix" class="input-group-addon">{{prefix}}</span>
       <input class="form-control"
@@ -71,6 +71,9 @@
         type: String,
         note: "A label to be appended after the input."
       },
+      ariaLabel: {
+        type: String
+      },       
       errors: {
         type: Array,
         note: "List of errors to display."
