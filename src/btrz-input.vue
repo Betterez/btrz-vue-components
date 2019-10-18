@@ -4,7 +4,7 @@
       'input--empty': isEmpty,
       'input--filled': !isEmpty,
       'bz-has-error': hasError
-    }">
+    }" :aria-describedby="ariaDescribedby">
     <btrz-label :id="id" :label="label" :aria-label="ariaLabel"></btrz-label>
     <div class="input-group">
       <span v-if="prefix" class="input-group-addon">{{prefix}}</span>
@@ -18,6 +18,7 @@
       :value="value"
       :placeholder="placeholder"
       :label="label"
+      :aria-describedby="ariaDescribedby"      
       :min="min"
       :max="max"
       :maxlength="maxlength"
@@ -73,7 +74,10 @@
       },
       ariaLabel: {
         type: String
-      },       
+      },
+      ariaDescribedby: {
+        type: String
+      }, 
       errors: {
         type: Array,
         note: "List of errors to display."
