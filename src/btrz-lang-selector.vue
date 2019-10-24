@@ -1,4 +1,4 @@
-<template v-if="languages && Object.keys(languages).length > 1">
+<template v-if="languages && Object.keys(languages).length > 1" :aria-label="ariaLabel">
   <div class="flex-item user-nav text-center">
     <span class="language-switcher">
       <select :value="lang" v-on:change="changeLang($event.target.value)">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  //usage: <btrz-lang-selector :languages="languages" v-model="lang"></btrz-lang-selector>
+  //usage: <btrz-lang-selector :languages="languages" v-model="lang" :aria-label="Select your language"></btrz-lang-selector>
   export default {
     name: "BtrzLangSelector",
     model: {
@@ -23,6 +23,7 @@
     props: {
       "languages": Object,
       "language": String,
+      "ariaLabel": String,
     },
     methods: {
       changeLang: function (val) {
