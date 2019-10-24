@@ -1,6 +1,6 @@
 <template>
   <div v-if="cartId && qty > 0" class="flex-item user-nav cart-box">
-    <a class="ml-10 cart-link" @click="cartClicked" :ariaLabel="ariaLabel">
+    <a class="ml-10 cart-link" @click="cartClicked" :aria-label="ariaLabel">
       <span>({{qty}})</span>
       <i class="fa fa-lg fa-shopping-cart"></i>
     </a>
