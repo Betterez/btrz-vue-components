@@ -1,7 +1,7 @@
-<template v-if="languages && Object.keys(languages).length > 1" :aria-label="ariaLabel">
+<template v-if="languages && Object.keys(languages).length > 1">
   <div class="flex-item user-nav text-center">
     <span class="language-switcher">
-      <select :value="lang" v-on:change="changeLang($event.target.value)">
+      <select :value="lang" v-on:change="changeLang($event.target.value)" :aria-label="ariaLabel">
         <option v-if="languages.en" value="en">English</option>
         <option v-if="languages.fr" value="fr">Français</option>
         <option v-if="languages.de" value="de">Deutsch</option>
