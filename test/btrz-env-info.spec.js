@@ -13,10 +13,10 @@ describe("BtrzEnvInfo", () => {
       },
       component = mountComponent(BtrzEnvInfo, envInfo);
 
-    expect(component.$el.innerHTML).to.include(`<a href="${envInfo.commitUrl}"`);
+    expect(component.$el.innerHTML).to.include(`href="${envInfo.commitUrl}"`);
     expect(component.$el.innerHTML).to.include(`${envInfo.version}`);
     expect(component.$el.innerHTML).to.include(`ServerId: ${envInfo.serverId}`);
     expect(component.$el.innerHTML)
-      .to.equal(`Version: <a href="${envInfo.commitUrl}" target="_blank">${envInfo.version}</a> - ServerId: ${envInfo.serverId}`);
+      .to.equal(`Version: <a aria-hidden="true" tabindex="-1" href="${envInfo.commitUrl}" target="_blank">${envInfo.version}</a> - ServerId: ${envInfo.serverId}`);
   });
 });

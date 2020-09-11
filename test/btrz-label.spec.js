@@ -16,7 +16,7 @@ describe("BtrzLabel", () => {
         components: {BtrzInput}
       }),
       label = $(".form-control label");
-    expect(label.text()).to.equal("test label:");
+    expect(label.text()).to.equal("test label");
   });
 
   it("btrz-toggle should render a label with a given text", () => {
@@ -29,7 +29,6 @@ describe("BtrzLabel", () => {
         components: {BtrzToggle}
       }),
       label = $(".form-control label");
-    expect(label.text()).to.equal("Activate this:");
+    expect(label.text()).to.equal("Activate this");
   });
-
 });

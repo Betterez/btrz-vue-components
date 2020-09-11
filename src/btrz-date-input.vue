@@ -39,7 +39,7 @@
       labelMonthPrev: "Mes anterior",
       labelMonthSelect: "Seleccione un mes",
       labelYearSelect: "Seleccione un año",
-    },    
+    },
     en: {
       monthsFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -113,15 +113,15 @@
       getAriaLabel() {
         if (this.ariaLabel) {
           return this.ariaLabel.concat(" ");
-        } 
+        }
         else {
           return this.label ? this.label.concat(" ") : "";
         }
       },
       getLabel() {
         return this.label ? this.label.concat(" ") : "";
-      } 
-    },    
+      }
+    },
     props: {
       id: {type: String, default: ('_' + Math.random().toString(36).substr(2, 9))},
       placeholder: {type: String},
@@ -136,7 +136,19 @@
       disabled: {type: Boolean, "default": false},
       errors: {type: Object},
       label: {type: String},
-      ariaLabel: {type: String},      
+      ariaLabel: {type: String},
+      enabledDays: {
+        type: Object,
+        default: {
+          monday: true,
+          tuesday: true,
+          wednesday: true,
+          thursday: true,
+          friday: true,
+          saturday: true,
+          sunday: true
+        }
+      }
     },
     model: {
       prop: "value",
@@ -167,7 +179,7 @@
       const baseConfig = {
         onSet: this.onSet,
         onClose: this.onClose,
-        onOpen: this.onOpen,        
+        onOpen: this.onOpen,
         format: this.displayFormat
       };
 
@@ -184,6 +196,7 @@
       this.setPickadateDate(this.value);
       this.setPickadateLimit(this.minDate, "min");
       this.setPickadateLimit(this.maxDate, "max");
+      this.setPickadateDisable(this.enabledDays);
 
       var updateAssertive = function(id, e) {
         var key = e.which || e.keyCode;
@@ -195,7 +208,7 @@
       document.querySelector(this.pickerSelector).addEventListener("keyup", updateAssertive.bind(this, this.assertiveId) )
 
       document.querySelector(this.pickerSelector.concat(" .picker__wrap")).setAttribute("aria-label", this.$t('ariaLabelDatePickerInstructions'));
-     
+
     },
     methods: {
       formatDate(date) {
@@ -208,25 +221,25 @@
       onOpen() {
         const date = document.querySelector(this.pickerSelector.concat(" .picker__day.picker__day--infocus.picker__day--highlighted"));
         if (date) document.querySelector("#".concat(this.assertiveId)).innerHTML = this.getAriaLabel.concat(date.getAttribute("aria-label"));
-      },      
+      },
       onClose() {
         document.querySelector("#".concat(this.assertiveId)).innerHTML = "";
-      },      
+      },
       onSet(context) {
 
         if ("select" in context) {
           if (typeof context.select === 'object' )
-            context.select = context.select.pick;  
-            
-          this.displayDate = this.getLabel.concat(this.$refs.input.value.concat(this.$t('selected')));            
-                 
+            context.select = context.select.pick;
+
+          this.displayDate = this.getLabel.concat(this.$refs.input.value.concat(this.$t('selected')));
+
           const date = this.formatDate(context.select);
           this.$emit("change", date);
           this.isEmpty = !Boolean(date);
         } else if ("clear" in context) {
 
           this.displayDate = "";
-          
+
           this.$emit("change", null);
           this.isEmpty = !Boolean(null);
         }
@@ -259,6 +272,26 @@
         }
         this.picker.set(limit, parsedDate);
       },
+      setPickadateDisable(enabledDays) {
+        let disabled = []
+        if (enabledDays &&
+          enabledDays.monday !== undefined &&
+          enabledDays.tuesday !== undefined &&
+          enabledDays.wednesday !== undefined &&
+          enabledDays.thursday !== undefined &&
+          enabledDays.friday !== undefined &&
+          enabledDays.saturday !== undefined &&
+          enabledDays.sunday !== undefined) {
+          disabled.push(enabledDays.sunday ? 0 : 1);
+          disabled.push(enabledDays.monday ? 0 : 2);
+          disabled.push(enabledDays.tuesday ? 0 : 3);
+          disabled.push(enabledDays.wednesday ? 0 : 4);
+          disabled.push(enabledDays.thursday ? 0 : 5);
+          disabled.push(enabledDays.friday ? 0 : 6);
+          disabled.push(enabledDays.saturday ? 0 : 7);
+        }
+        this.picker.set("disable", disabled);
+      },
       setPickadateDate(newDate) {
         let date = null;
 
@@ -288,9 +321,9 @@
     },
     data() {
       return {
-        displayDate: '', 
-        isEmpty: true, 
-        focused: false, 
+        displayDate: '',
+        isEmpty: true,
+        focused: false,
         inputValue: this.value,
         assertiveId: ('_' + Math.random().toString(36).substr(2, 9)),
         pickerSelector: ''};
